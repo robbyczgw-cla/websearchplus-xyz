@@ -11,9 +11,13 @@
 <meta property="og:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
 <meta property="og:description" content="Smart provider routing, 10 search providers, 5 extract providers, quality reports, research mode, optional beta cited answers, and persistent routing preferences for Hermes Agent.">
 <meta property="og:url" content="https://websearchplus.xyz/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
 <meta name="twitter:description" content="Smart provider routing, optional beta cited answers, and persistent routing preferences for Hermes Agent.">
+<meta name="twitter:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -22,11 +26,13 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Cross-platform",
   "url": "https://websearchplus.xyz/",
+  "image": "https://websearchplus.xyz/assets/web-search-plus-og.png",
   "description": "Multi-provider web search and extraction with intelligent routing for OpenClaw, Hermes Agent, and MCP clients.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -98,8 +104,14 @@ nav {
 nav .container { display: flex; align-items: center; justify-content: space-between; }
 .nav-logo {
   font-family: var(--mono); font-weight: 700; font-size: 0.95rem;
-  color: var(--text); display: flex; align-items: center; gap: 8px;
+  color: var(--text); display: flex; align-items: center; gap: 10px;
   letter-spacing: -0.02em;
+}
+.nav-logo img {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  box-shadow: 0 0 18px var(--accent-glow);
 }
 .nav-logo .accent { color: var(--accent); }
 .nav-links { display: flex; gap: 32px; }
@@ -141,6 +153,15 @@ h1 {
   color: var(--text);
 }
 h1 .thin { font-weight: 300; color: var(--text-secondary); }
+.hero-logo {
+  width: clamp(118px, 17vw, 176px);
+  height: clamp(118px, 17vw, 176px);
+  object-fit: cover;
+  border-radius: 34px;
+  margin: 0 auto 28px;
+  display: block;
+  box-shadow: 0 18px 60px var(--accent-glow), 0 0 0 1px var(--border);
+}
 .hero-title-accent {
   display: inline-block;
   color: var(--accent);
@@ -460,7 +481,7 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="container">
-    <div class="nav-logo"><span class="accent">&gt;</span> web-search-plus</div>
+    <div class="nav-logo"><img src="/assets/web-search-plus-icon-192.png" alt="" aria-hidden="true"><span>web-search-plus</span></div>
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#providers">Providers</a>
@@ -478,6 +499,7 @@ footer {
 <section class="hero">
   <div class="container">
     <div class="hero-eyebrow"><span class="line"></span> Hermes Agent flagship plugin</div>
+    <img class="hero-logo" src="/assets/web-search-plus-logo.png" alt="Web Search Plus logo">
     <h1><span class="hero-title-kicker">Hermes</span><span class="hero-title-accent">Web Search</span><br><span class="thin">Plus</span></h1>
     <p class="hero-sub">Intent-aware web search, extraction, and answer grounding for Hermes Agent — with OpenClaw and MCP integrations using the same routing engine.</p>
     <div class="hero-stats" aria-label="Project stats">
