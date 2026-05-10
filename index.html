@@ -115,6 +115,7 @@ nav .container { display: flex; align-items: center; justify-content: space-betw
   padding: 180px 0 120px;
   position: relative;
   border-bottom: 1px solid var(--border);
+  text-align: center;
 }
 .hero::after {
   content: '';
@@ -127,29 +128,68 @@ nav .container { display: flex; align-items: center; justify-content: space-betw
   font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
   color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
   margin-bottom: 24px;
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
 }
 .hero-eyebrow .line { width: 32px; height: 1px; background: var(--accent); }
 
 h1 {
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(3.6rem, 8vw, 7rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.055em;
   line-height: 1.0;
   margin-bottom: 28px;
   color: var(--text);
 }
 h1 .thin { font-weight: 300; color: var(--text-secondary); }
+.hero-title-accent {
+  display: inline-block;
+  color: var(--accent);
+  text-shadow: 0 0 34px var(--accent-glow);
+}
+.hero-title-kicker {
+  display: block;
+  font-family: var(--mono);
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
 
 .hero-sub {
   font-size: 1.2rem;
   color: var(--text-secondary);
-  max-width: 520px;
+  max-width: 760px;
   margin-bottom: 48px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.7;
 }
 
-.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: -18px 0 42px;
+}
+.hero-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+.hero-stat strong { color: var(--text); font-weight: 700; }
+.hero-stat .star { color: var(--amber); }
+
+.hero-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem;
@@ -166,7 +206,7 @@ h1 .thin { font-weight: 300; color: var(--text-secondary); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); opacity: 1; }
 
 .providers-row {
-  display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center;
 }
 .providers-row .label {
   font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
@@ -401,6 +441,7 @@ footer {
   .nav-links { gap: 16px; }
   .nav-links a { font-size: 0.78rem; }
   .hero { padding: 140px 0 80px; }
+  h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
   .providers-row { gap: 10px; }
 }
 </style>
@@ -427,12 +468,19 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-eyebrow"><span class="line"></span> 10 providers · 1 unified API</div>
-    <h1>Web Search<br><span class="thin">Plus</span></h1>
-    <p class="hero-sub">Intelligent multi-provider search routing for AI agents. Available as an OpenClaw Skill, native OpenClaw Plugin, MCP server, and Hermes integration.</p>
+    <div class="hero-eyebrow"><span class="line"></span> Hermes Agent flagship plugin</div>
+    <h1><span class="hero-title-kicker">Hermes</span><span class="hero-title-accent">Web Search</span><br><span class="thin">Plus</span></h1>
+    <p class="hero-sub">Intent-aware web search, extraction, and answer grounding for Hermes Agent — with OpenClaw and MCP integrations using the same routing engine.</p>
+    <div class="hero-stats" aria-label="Project stats">
+      <span class="hero-stat"><span class="star">★</span> <strong>167</strong> GitHub stars</span>
+      <span class="hero-stat"><strong>10</strong> search providers</span>
+      <span class="hero-stat"><strong>5</strong> extract providers</span>
+      <span class="hero-stat">Routing · fallback · research mode</span>
+    </div>
     <div class="hero-actions">
-      <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" class="btn btn-accent" target="_blank">Get Skill v3.0.1 →</a>
-      <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" class="btn btn-ghost" target="_blank">Get Plugin v2.3.10 →</a>
+      <a href="#quickstart" class="btn btn-accent">Install for Hermes →</a>
+      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="btn btn-ghost" target="_blank">GitHub ★ 167 →</a>
+      <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" class="btn btn-ghost" target="_blank">OpenClaw Skill →</a>
     </div>
     <div class="providers-row">
       <span class="label">Routes to</span>
