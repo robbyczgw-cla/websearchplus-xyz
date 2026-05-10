@@ -478,7 +478,7 @@ footer {
       <span class="hero-stat">Routing · fallback · research mode</span>
     </div>
     <div class="hero-actions">
-      <a href="#quickstart" class="btn btn-accent">Install for Hermes →</a>
+      <a href="#quickstart-hermes" class="btn btn-accent" data-open-tab="hermes">Install for Hermes →</a>
       <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="btn btn-ghost" target="_blank">GitHub ★ 167 →</a>
       <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" class="btn btn-ghost" target="_blank">OpenClaw Skill →</a>
     </div>
@@ -711,15 +711,16 @@ footer {
       <p class="section-desc">Pick your setup and paste. That's it.</p>
     </div>
     <div class="code-section fade-up">
+      <span id="quickstart-hermes" aria-hidden="true"></span>
       <div class="tab-bar">
-        <button class="tab-btn active" data-tab="openclaw">OpenClaw Skill</button>
+        <button class="tab-btn" data-tab="openclaw">OpenClaw Skill</button>
         <button class="tab-btn" data-tab="plugin">OpenClaw Plugin</button>
-        <button class="tab-btn" data-tab="hermes">Hermes Agent</button>
+        <button class="tab-btn active" data-tab="hermes">Hermes Agent</button>
         <button class="tab-btn" data-tab="claude">Claude Desktop</button>
         <button class="tab-btn" data-tab="cursor">Cursor</button>
         <button class="tab-btn" data-tab="nanobot">NanoBot</button>
       </div>
-      <div id="tab-openclaw" class="tab-panel active">
+      <div id="tab-openclaw" class="tab-panel">
         <button class="tab-copy" onclick="copyTab('openclaw', this)">Copy</button>
         <pre><span class="cmt"># Install the OpenClaw Skill (v3.0.1)</span>
 openclaw skills install web-search-plus
@@ -751,7 +752,7 @@ plugins.entries.web-search-plus-plugin-v2.config.exaApiKey=your-exa-key
 
 <span class="cmt"># Done! web_search_plus and web_extract_plus are native tools.</span></pre>
       </div>
-      <div id="tab-hermes" class="tab-panel">
+      <div id="tab-hermes" class="tab-panel active">
         <button class="tab-copy" onclick="copyTab('hermes', this)">Copy</button>
         <pre><span class="cmt"># 1) Install + enable the Hermes plugin</span>
 hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable
@@ -949,14 +950,27 @@ function copyText(text, btn) {
 }
 
 // Tab switching
+function activateTab(tabId) {
+  var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+  var targetPanel = document.getElementById('tab-' + tabId);
+  if (!targetBtn || !targetPanel) return;
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  targetBtn.classList.add('active');
+  targetPanel.classList.add('active');
+}
+
 document.querySelectorAll('.tab-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-  });
+  btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
 });
+
+document.querySelectorAll('[data-open-tab]').forEach(function(link) {
+  link.addEventListener('click', function() { activateTab(link.dataset.openTab); });
+});
+
+if (window.location.hash === '#quickstart-hermes' || window.location.hash === '#tab-hermes') {
+  activateTab('hermes');
+}
 
 // Copy tab content
 var tabContents = {
