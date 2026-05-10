@@ -545,7 +545,7 @@ footer {
       <div class="feature-cell">
         <div class="f-label">Routing</div>
         <h3>Zero Config</h3>
-        <p>Automatically picks the right provider based on query intent. Research → Tavily. Shopping → Serper/Brave. Neural discovery → Exa. Extraction → Linkup first.</p>
+        <p>Automatically picks the right provider based on query intent. Research → Tavily. Shopping → Serper/Brave. Neural discovery → Exa. Extraction → Firecrawl first, then Linkup/Exa fallback.</p>
       </div>
       <div class="feature-cell">
         <div class="f-label">Resilience</div>
@@ -654,7 +654,7 @@ footer {
       <div class="product-card featured primary">
         <div class="product-header">
           <div class="product-title">Hermes Agent</div>
-          <span class="product-badge badge-cyan">v1.9.1</span>
+          <span class="product-badge badge-cyan">v1.9.2</span>
         </div>
         <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and optional beta <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_answer_plus</code>. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery; answer mode is for explicit summaries and cited synthesis. v1.9.x adds persistent provider preferences via <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">setup.py config</code>, including fixed-provider mode, priority, fallback, disabled providers, and runtime config quarantine.</p>
         <div class="product-install">
@@ -662,7 +662,7 @@ footer {
           <button class="copy-btn" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button>
         </div>
         <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="product-link" target="_blank">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.1" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v1.9.1 →</a>
+        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.2" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v1.9.2 →</a>
       </div>
       <!-- OpenClaw Plugin -->
       <div class="product-card featured">
@@ -670,7 +670,7 @@ footer {
           <div class="product-title">OpenClaw Plugin</div>
           <span class="product-badge badge-amber">v2.3.10</span>
         </div>
-        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Firecrawl, Linkup, Tavily, Exa, You.com).</p>
+        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Firecrawl, Linkup, Exa, Tavily, You.com).</p>
         <div class="product-install">
           <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
           <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
@@ -873,7 +873,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
           <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Skill v3.0.1</span>
           <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 3, 2026</span>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Major OpenClaw Skill release: Brave, Linkup, and Firecrawl search providers, 10-provider routing parity, and URL extraction via scripts/extract.py with fallback across Firecrawl, Linkup, Tavily, Exa, and You.com.</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Major OpenClaw Skill release: Brave, Linkup, and Firecrawl search providers, 10-provider routing parity, and URL extraction via scripts/extract.py with fallback across Firecrawl, Linkup, Exa, Tavily, and You.com.</p>
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
@@ -884,10 +884,10 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v1.9.1</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 9, 2026</span>
+          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v1.9.2</span>
+          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 10, 2026</span>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Hermes plugin v1.9.1 hardens the new routing-preference onboarding: <code>kilo-perplexity</code> and <code>kilo_perplexity</code> both normalize correctly, and repeated same-second config quarantines/backups no longer overwrite earlier artifacts.</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Hermes plugin v1.9.2 locks the direct extraction policy: <code>web_extract_plus(provider=&quot;auto&quot;)</code> now documents and tests Firecrawl → Linkup → Exa → Tavily → You.com, matching the live benchmark-backed default.</p>
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
@@ -943,7 +943,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
       <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank">PyPI</a>
       <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank">ClawHub Skill</a>
       <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank">ClawHub Plugin</a>
-      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.1" target="_blank">Hermes v1.9.1</a>
+      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.2" target="_blank">Hermes v1.9.2</a>
       <a href="https://openclaw.ai" target="_blank">OpenClaw</a>
     </div>
   </div>
