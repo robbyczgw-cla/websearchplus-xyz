@@ -323,9 +323,17 @@ td:first-child { font-weight: 600; font-family: var(--mono); font-size: 0.85rem;
 .product-card {
   background: var(--bg-card); padding: 36px 24px;
   display: flex; flex-direction: column; min-width: 0; overflow: hidden;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .product-card:hover { background: var(--bg-card-hover); }
+.product-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card));
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.product-card.featured.primary { box-shadow: inset 0 0 0 1px var(--accent), 0 0 40px rgba(0, 229, 255, 0.08); }
+.product-card.featured .product-title { font-size: 1.35rem; }
+.product-card.featured .product-desc { font-size: 0.95rem; }
 .product-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 8px; flex-wrap: wrap; }
 .product-title {
   font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
@@ -363,6 +371,7 @@ td:first-child { font-weight: 600; font-family: var(--mono); font-size: 0.85rem;
 
 @media (max-width: 900px) {
   .products-grid { grid-template-columns: 1fr; }
+  .product-card.featured { grid-column: span 1; }
 }
 
 /* ─── CODE TABS ─── */
@@ -479,8 +488,8 @@ footer {
     </div>
     <div class="hero-actions">
       <a href="#quickstart-hermes" class="btn btn-accent" data-open-tab="hermes">Install for Hermes →</a>
+      <a href="#quickstart-plugin" class="btn btn-ghost" data-open-tab="plugin">OpenClaw Plugin →</a>
       <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="btn btn-ghost" target="_blank">GitHub ★ 167 →</a>
-      <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" class="btn btn-ghost" target="_blank">OpenClaw Skill →</a>
     </div>
     <div class="providers-row">
       <span class="label">Routes to</span>
@@ -637,10 +646,38 @@ footer {
   <div class="container centered">
     <div class="fade-up">
       <div class="section-label">Install</div>
-      <h2>Choose your integration</h2>
-      <p class="section-desc">Four ways in — same smart routing engine under the hood.</p>
+      <h2>Start with Hermes or OpenClaw Plugin</h2>
+      <p class="section-desc">Primary installs first. Skill and MCP stay available, but the flagship paths are Hermes Agent and the native OpenClaw Plugin.</p>
     </div>
     <div class="products-grid fade-up">
+      <!-- Hermes Agent -->
+      <div class="product-card featured primary">
+        <div class="product-header">
+          <div class="product-title">Hermes Agent</div>
+          <span class="product-badge badge-cyan">v1.9.1</span>
+        </div>
+        <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and optional beta <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_answer_plus</code>. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery; answer mode is for explicit summaries and cited synthesis. v1.9.x adds persistent provider preferences via <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">setup.py config</code>, including fixed-provider mode, priority, fallback, disabled providers, and runtime config quarantine.</p>
+        <div class="product-install">
+          <code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code>
+          <button class="copy-btn" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button>
+        </div>
+        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="product-link" target="_blank">GitHub →</a>
+        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.1" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v1.9.1 →</a>
+      </div>
+      <!-- OpenClaw Plugin -->
+      <div class="product-card featured">
+        <div class="product-header">
+          <div class="product-title">OpenClaw Plugin</div>
+          <span class="product-badge badge-amber">v2.3.10</span>
+        </div>
+        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Firecrawl, Linkup, Tavily, Exa, You.com).</p>
+        <div class="product-install">
+          <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
+          <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
+        </div>
+        <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" class="product-link" target="_blank">View on ClawHub →</a>
+        <a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">GitHub →</a>
+      </div>
       <!-- OpenClaw Skill -->
       <div class="product-card">
         <div class="product-header">
@@ -670,34 +707,6 @@ footer {
         <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/releases/tag/v0.5.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v0.5.0 →</a>
         <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/blob/main/CHANGELOG.md" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Changelog →</a>
       </div>
-      <!-- OpenClaw Plugin -->
-      <div class="product-card">
-        <div class="product-header">
-          <div class="product-title">OpenClaw Plugin</div>
-          <span class="product-badge badge-amber">v2.3.10</span>
-        </div>
-        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Firecrawl, Linkup, Tavily, Exa, You.com).</p>
-        <div class="product-install">
-          <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
-          <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
-        </div>
-        <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" class="product-link" target="_blank">View on ClawHub →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">GitHub →</a>
-      </div>
-      <!-- Hermes Agent -->
-      <div class="product-card">
-        <div class="product-header">
-          <div class="product-title">Hermes Agent</div>
-          <span class="product-badge badge-cyan">v1.9.1</span>
-        </div>
-        <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and optional beta <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_answer_plus</code>. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery; answer mode is for explicit summaries and cited synthesis. v1.9.x adds persistent provider preferences via <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">setup.py config</code>, including fixed-provider mode, priority, fallback, disabled providers, and runtime config quarantine.</p>
-        <div class="product-install">
-          <code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code>
-          <button class="copy-btn" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button>
-        </div>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="product-link" target="_blank">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.1" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v1.9.1 →</a>
-      </div>
     </div>
   </div>
 </section>
@@ -712,10 +721,11 @@ footer {
     </div>
     <div class="code-section fade-up">
       <span id="quickstart-hermes" aria-hidden="true"></span>
+      <span id="quickstart-plugin" aria-hidden="true"></span>
       <div class="tab-bar">
-        <button class="tab-btn" data-tab="openclaw">OpenClaw Skill</button>
-        <button class="tab-btn" data-tab="plugin">OpenClaw Plugin</button>
         <button class="tab-btn active" data-tab="hermes">Hermes Agent</button>
+        <button class="tab-btn" data-tab="plugin">OpenClaw Plugin</button>
+        <button class="tab-btn" data-tab="openclaw">OpenClaw Skill</button>
         <button class="tab-btn" data-tab="claude">Claude Desktop</button>
         <button class="tab-btn" data-tab="cursor">Cursor</button>
         <button class="tab-btn" data-tab="nanobot">NanoBot</button>
@@ -970,6 +980,9 @@ document.querySelectorAll('[data-open-tab]').forEach(function(link) {
 
 if (window.location.hash === '#quickstart-hermes' || window.location.hash === '#tab-hermes') {
   activateTab('hermes');
+}
+if (window.location.hash === '#quickstart-plugin' || window.location.hash === '#tab-plugin') {
+  activateTab('plugin');
 }
 
 // Copy tab content
