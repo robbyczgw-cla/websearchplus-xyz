@@ -9,14 +9,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web Search Plus">
 <meta property="og:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
-<meta property="og:description" content="Smart provider routing, 10 search providers, 5 extract providers, quality reports, research mode, optional beta cited answers, and persistent routing preferences for Hermes Agent.">
+<meta property="og:description" content="Smart provider routing, 12 search providers, 5 extract providers, quality reports, research mode, and runtime routing preferences for Hermes Agent, OpenClaw, and MCP clients.">
 <meta property="og:url" content="https://websearchplus.xyz/">
 <meta property="og:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
-<meta name="twitter:description" content="Smart provider routing, optional beta cited answers, and persistent routing preferences for Hermes Agent.">
+<meta name="twitter:description" content="Smart provider routing, extraction, quality reports, research mode, and runtime routing preferences for Hermes Agent, OpenClaw, and MCP clients.">
 <meta name="twitter:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <script type="application/ld+json">
 {
@@ -504,7 +504,7 @@ footer {
     <p class="hero-sub">Intent-aware web search, extraction, and answer grounding for Hermes Agent — with OpenClaw and MCP integrations using the same routing engine.</p>
     <div class="hero-stats" aria-label="Project stats">
       <span class="hero-stat"><span class="star">★</span> <strong>167</strong> GitHub stars</span>
-      <span class="hero-stat"><strong>10</strong> search providers</span>
+      <span class="hero-stat"><strong>10+</strong> search providers</span>
       <span class="hero-stat"><strong>5</strong> extract providers</span>
       <span class="hero-stat">Routing · fallback · research mode</span>
     </div>
@@ -523,6 +523,7 @@ footer {
       <span class="provider-tag"><span class="dot" style="background:#10b981"></span> Linkup</span>
       <span class="provider-tag"><span class="dot" style="background:#f97316"></span> Firecrawl</span>
       <span class="provider-tag"><span class="dot" style="background:#38bdf8"></span> Perplexity</span>
+      <span class="provider-tag"><span class="dot" style="background:#8b5cf6"></span> Kilo Perplexity</span>
       <span class="provider-tag"><span class="dot" style="background:#ef4444"></span> You.com</span>
       <span class="provider-tag"><span class="dot" style="background:#22c55e"></span> SearXNG</span>
     </div>
@@ -598,7 +599,7 @@ footer {
   <div class="container centered">
     <div class="fade-up">
       <div class="section-label">Providers</div>
-      <h2>Ten search engines, one interface</h2>
+      <h2>Provider-aware search, one interface</h2>
       <p class="section-desc">Each provider excels at different query types. Web Search Plus knows which one to call.</p>
     </div>
     <div class="table-wrap fade-up">
@@ -648,6 +649,11 @@ footer {
             <td><code class="api-key">PERPLEXITY_API_KEY</code></td>
           </tr>
           <tr>
+            <td><span class="dot" style="background:#8b5cf6;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Kilo Perplexity</td>
+            <td class="best-for">Kilo gateway route for Perplexity-style answer results</td>
+            <td><code class="api-key">KILOCODE_API_KEY</code></td>
+          </tr>
+          <tr>
             <td><span class="dot" style="background:#ef4444;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>You.com</td>
             <td class="best-for">RAG, real-time web, code snippets</td>
             <td><code class="api-key">YOU_API_KEY</code></td>
@@ -690,9 +696,9 @@ footer {
       <div class="product-card featured">
         <div class="product-header">
           <div class="product-title">OpenClaw Plugin</div>
-          <span class="product-badge badge-amber">v2.3.10</span>
+          <span class="product-badge badge-amber">v2.6.0</span>
         </div>
-        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Tavily, Exa, Linkup, Firecrawl, You.com).</p>
+        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_routing_config_plus</code> as native OpenClaw tools. Expanded provider coverage includes Kilo Perplexity and SearXNG, strict explicit-provider behavior, in-memory routing preferences, and URL extraction across 5 providers (Tavily, Exa, Linkup, Firecrawl, You.com).</p>
         <div class="product-install">
           <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
           <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
@@ -771,7 +777,7 @@ PERPLEXITY_API_KEY=your-perplexity-key
       </div>
       <div id="tab-plugin" class="tab-panel">
         <button class="tab-copy" onclick="copyTab('plugin', this)">Copy</button>
-        <pre><span class="cmt"># Install from ClawHub (v2.3.10)</span>
+        <pre><span class="cmt"># Install from ClawHub (v2.6.0)</span>
 openclaw plugins install clawhub:web-search-plus-plugin-v2
 
 <span class="cmt"># Configure at least one provider in OpenClaw plugin config</span>
@@ -781,8 +787,14 @@ plugins.entries.web-search-plus-plugin-v2.config.tavilyApiKey=your-tavily-key
 plugins.entries.web-search-plus-plugin-v2.config.linkupApiKey=your-linkup-key
 plugins.entries.web-search-plus-plugin-v2.config.firecrawlApiKey=your-firecrawl-key
 plugins.entries.web-search-plus-plugin-v2.config.exaApiKey=your-exa-key
+plugins.entries.web-search-plus-plugin-v2.config.kilocodeApiKey=your-kilocode-key
+plugins.entries.web-search-plus-plugin-v2.config.youApiKey=your-you-key
+plugins.entries.web-search-plus-plugin-v2.config.searxngInstanceUrl=https://your-searxng.example
 
-<span class="cmt"># Done! web_search_plus and web_extract_plus are native tools.</span></pre>
+<span class="cmt"># Optional: isolate in-memory routing preferences by namespace</span>
+plugins.entries.web-search-plus-plugin-v2.config.routingConfigPath=memory:default
+
+<span class="cmt"># Done! web_search_plus, web_extract_plus, and web_routing_config_plus are native tools.</span></pre>
       </div>
       <div id="tab-hermes" class="tab-panel active">
         <button class="tab-copy" onclick="copyTab('hermes', this)">Copy</button>
@@ -899,10 +911,10 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Plugin v2.3.10</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 3, 2026</span>
+          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Plugin v2.6.0</span>
+          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 16, 2026</span>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">OpenClaw Plugin docs refresh for the v2.3.x native tool line, including Brave, Linkup, Firecrawl, web_extract_plus, fallback routing, and package verification notes.</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">OpenClaw Plugin v2.6.0 adds Kilo Perplexity and SearXNG coverage, strict explicit-provider behavior, and <code>web_routing_config_plus</code> for scanner-safe in-memory routing preferences.</p>
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
