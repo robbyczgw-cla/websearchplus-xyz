@@ -567,7 +567,7 @@ footer {
       <div class="feature-cell">
         <div class="f-label">Routing</div>
         <h3>Zero Config</h3>
-        <p>Automatically picks the right provider based on query intent. Research → Tavily. Shopping → Serper/Brave. Neural discovery → Exa. Extraction → Firecrawl first, then Linkup/Exa fallback.</p>
+        <p>Automatically picks the right provider based on query intent. Research → Tavily. Shopping → Serper/Brave. Neural discovery → Exa. Extraction → Tavily first, then Exa/Linkup/Firecrawl fallback.</p>
       </div>
       <div class="feature-cell">
         <div class="f-label">Resilience</div>
@@ -585,9 +585,9 @@ footer {
         <p>Opt in with <code>mode=&quot;research&quot;</code> and <code>research_time_budget</code>. It searches first, extracts second, and skips expensive work when the budget is gone.</p>
       </div>
       <div class="feature-cell">
-        <div class="f-label">Answer Beta</div>
-        <h3>Optional Cited Synthesis</h3>
-        <p><code>web_answer_plus</code> is beta and opt-in: use it for explicit summaries or cited briefs. For live facts, sports lineups, schedules, weather, prices, and source discovery, prefer <code>web_search_plus</code>.</p>
+        <div class="f-label">Lean Surface</div>
+        <h3>Search + Extract</h3>
+        <p>v2.1 keeps the public tool surface focused: <code>web_search_plus</code> for source discovery and <code>web_extract_plus</code> for URL content. Synthesis belongs in the host agent, not a second web tool pipeline.</p>
       </div>
     </div>
   </div>
@@ -676,15 +676,15 @@ footer {
       <div class="product-card featured primary">
         <div class="product-header">
           <div class="product-title">Hermes Agent</div>
-          <span class="product-badge badge-cyan">v1.9.2</span>
+          <span class="product-badge badge-cyan">v2.1.0</span>
         </div>
-        <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and optional beta <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_answer_plus</code>. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery; answer mode is for explicit summaries and cited synthesis. v1.9.x adds persistent provider preferences via <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">setup.py config</code>, including fixed-provider mode, priority, fallback, disabled providers, and runtime config quarantine.</p>
+        <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>. v2.1 removes the old answer tool, ships Routing v2 as the stable default, and uses Tavily-first extraction with Exa, Linkup, Firecrawl, and You.com fallback. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery.</p>
         <div class="product-install">
           <code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code>
           <button class="copy-btn" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button>
         </div>
         <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="product-link" target="_blank">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.2" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v1.9.2 →</a>
+        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.1.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v2.1.0 →</a>
       </div>
       <!-- OpenClaw Plugin -->
       <div class="product-card featured">
@@ -692,7 +692,7 @@ footer {
           <div class="product-title">OpenClaw Plugin</div>
           <span class="product-badge badge-amber">v2.3.10</span>
         </div>
-        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Firecrawl, Linkup, Exa, Tavily, You.com).</p>
+        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code> as native OpenClaw tools. 10 search providers including Brave, deterministic auto-routing, fallback, caching, and URL content extraction across 5 providers (Tavily, Exa, Linkup, Firecrawl, You.com).</p>
         <div class="product-install">
           <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
           <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
@@ -717,16 +717,16 @@ footer {
       <div class="product-card">
         <div class="product-header">
           <div class="product-title">MCP Server</div>
-          <span class="product-badge badge-cyan">PyPI v0.5.0</span>
+          <span class="product-badge badge-cyan">PyPI v0.8.0</span>
         </div>
-        <p class="product-desc">Standalone Python MCP server synced with the Web Search Plus v1.9 engine. Exposes <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract</code>, 10 search providers, 5 extract providers, quality reports, opt-in research mode, beta web_answer, and routing config commands. Works with Claude Desktop, Cursor, NanoBot, and any MCP-compatible client.</p>
+        <p class="product-desc">Standalone Python MCP server synced with the Web Search Plus Routing v2 engine. Exposes stable <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract</code>, 12 search providers, Tavily-first extraction, quality reports, opt-in research mode, and routing config commands. The v0.8 line removes the old beta web_answer surface to match Hermes v2.1.</p>
         <div class="product-install">
           <code>uvx web-search-plus-mcp</code>
           <button class="copy-btn" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button>
         </div>
-        <a href="https://pypi.org/project/web-search-plus-mcp/0.5.0/" class="product-link" target="_blank">PyPI →</a>
+        <a href="https://pypi.org/project/web-search-plus-mcp/0.8.0/" class="product-link" target="_blank">PyPI →</a>
         <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/releases/tag/v0.5.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v0.5.0 →</a>
+        <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/releases/tag/v0.8.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v0.8.0 →</a>
         <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/blob/main/CHANGELOG.md" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Changelog →</a>
       </div>
     </div>
@@ -816,7 +816,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
   <span class="key">"mcpServers"</span>: {
     <span class="key">"web-search-plus"</span>: {
       <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.5.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
+      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
       <span class="key">"env"</span>: {
         <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
         <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
@@ -837,7 +837,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
   <span class="key">"mcpServers"</span>: {
     <span class="key">"web-search-plus"</span>: {
       <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.5.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
+      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
       <span class="key">"env"</span>: {
         <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
         <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
@@ -857,7 +857,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
     <span class="key">"mcpServers"</span>: {
       <span class="key">"web-search-plus"</span>: {
         <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-        <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.5.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
+        <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
         <span class="key">"env"</span>: {
           <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
           <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
@@ -885,10 +885,10 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
     <div style="max-width:640px;margin:48px auto 0;text-align:left">
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">MCP v0.5.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 9, 2026</span>
+          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">MCP v0.8.0</span>
+          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 16, 2026</span>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">MCP v0.5.0 adds routing config commands, status/list/setup onboarding, beta web_answer gating, and v1.9 routing behavior parity while keeping the short MCP tool names: web_search, web_extract, and optional web_answer.</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">MCP v0.8.0 syncs with Web Search Plus v2.1: stable web_search + web_extract only, beta web_answer removed, and extraction now defaults to Tavily → Exa → Linkup → Firecrawl → You.com.</p>
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
@@ -906,10 +906,10 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v1.9.2</span>
+          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v2.1.0</span>
           <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 10, 2026</span>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Hermes plugin v1.9.2 locks the direct extraction policy: <code>web_extract_plus(provider=&quot;auto&quot;)</code> now documents and tests Firecrawl → Linkup → Exa → Tavily → You.com, matching the live benchmark-backed default.</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Hermes plugin v2.1.0 trims the surface to <code>web_search_plus</code> + <code>web_extract_plus</code>, removes answer-mode duplication, and sets the benchmark-backed extraction order to Tavily → Exa → Linkup → Firecrawl → You.com.</p>
       </div>
       <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
@@ -965,7 +965,7 @@ python3 search.py --query "Hermes Agent latest release" --provider auto --qualit
       <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank">PyPI</a>
       <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank">ClawHub Skill</a>
       <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank">ClawHub Plugin</a>
-      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v1.9.2" target="_blank">Hermes v1.9.2</a>
+      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.1.0" target="_blank">Hermes v2.1.0</a>
       <a href="https://openclaw.ai" target="_blank">OpenClaw</a>
     </div>
   </div>
