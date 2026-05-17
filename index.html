@@ -2,1067 +2,427 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Search Plus — Intelligent Multi-Provider Search for AI Agents</title>
-<meta name="description" content="One query, the right provider, automatically. Smart search routing for OpenClaw agents, Hermes Agent, and MCP clients.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Search Plus — One search. Every source.</title>
+<meta name="description" content="Web Search Plus routes web search and extraction across Serper, Brave, Tavily, Exa, Linkup, Firecrawl, You.com, SearXNG and more for Hermes Agent, OpenClaw and MCP clients.">
 <link rel="canonical" href="https://websearchplus.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web Search Plus">
-<meta property="og:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
-<meta property="og:description" content="Smart provider routing, 12 search providers, 5 extract providers, quality reports, research mode, and runtime routing preferences for Hermes Agent, OpenClaw, and MCP clients.">
+<meta property="og:title" content="Web Search Plus — One search. Every source.">
+<meta property="og:description" content="Multi-provider search and extraction for Hermes Agent, OpenClaw and any MCP client. Smart routing, fallback, quality reports and fast setup.">
 <meta property="og:url" content="https://websearchplus.xyz/">
 <meta property="og:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Web Search Plus — Intelligent Multi-Provider Search for AI Agents">
-<meta name="twitter:description" content="Smart provider routing, extraction, quality reports, research mode, and runtime routing preferences for Hermes Agent, OpenClaw, and MCP clients.">
+<meta name="twitter:title" content="Web Search Plus — One search. Every source.">
+<meta name="twitter:description" content="Smart provider routing, extraction, quality reports and fast setup for agentic web research.">
 <meta name="twitter:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Web Search Plus",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Cross-platform",
-  "url": "https://websearchplus.xyz/",
-  "image": "https://websearchplus.xyz/assets/web-search-plus-og.png",
-  "description": "Multi-provider web search and extraction with intelligent routing for OpenClaw, Hermes Agent, and MCP clients.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-}
-</script>
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with intelligent routing for Hermes Agent, OpenClaw and MCP clients.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --bg: #ffffff;
-  --bg-surface: #f6f8fa;
-  --bg-card: #f6f8fa;
-  --bg-card-hover: #eaeef2;
-  --bg-code: #f0f2f5;
-  --border: #d0d7de;
-  --border-hover: #adb5bd;
-  --text: #1a1a2e;
-  --text-secondary: #57606a;
-  --text-dim: #8c959f;
-  --accent: #0969da;
-  --accent-dim: #0969da22;
-  --accent-mid: #0969da44;
-  --accent-glow: #0969da10;
-  --green: #1a7f37;
-  --amber: #d1242f;
-  --radius: 8px;
-  --radius-sm: 4px;
-  --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+  --bg: #08090d;
+  --surface: #0f1118;
+  --surface-2: #151923;
+  --line: rgba(255,255,255,.11);
+  --line-strong: rgba(255,255,255,.2);
+  --text: #f4f1eb;
+  --muted: #a9acb7;
+  --dim: #747987;
+  --accent: #f5a524;
+  --accent-2: #68e1fd;
+  --green: #48d597;
+  --danger: #ff6b6b;
+  --radius: 26px;
+  --radius-sm: 16px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
 }
-
-[data-theme="dark"] {
-  --bg: #0d1117;
-  --bg-surface: #161b22;
-  --bg-card: #1c2128;
-  --bg-card-hover: #22272e;
-  --bg-code: #141a22;
-  --border: #30363d;
-  --border-hover: #484f58;
-  --text: #e8e8e8;
-  --text-secondary: #888888;
-  --text-dim: #555555;
-  --accent: #00f5ff;
-  --accent-dim: #00f5ff22;
-  --accent-mid: #00f5ff44;
-  --accent-glow: #00f5ff15;
-  --green: #00e676;
-  --amber: #ffab00;
-}
-
-html { scroll-behavior: smooth; }
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
 body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  margin: 0;
+  min-width: 320px;
   overflow-x: hidden;
+  font-family: var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% -10%, rgba(245,165,36,.23), transparent 32rem),
+    radial-gradient(circle at 95% 8%, rgba(104,225,253,.12), transparent 28rem),
+    linear-gradient(180deg, #08090d 0%, #0a0c12 48%, #07080b 100%);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-
-a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
-a:hover { opacity: 0.8; }
-
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--bg-surface); backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 0;
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8,9,13,.78);
+  backdrop-filter: blur(18px);
 }
-nav .container { display: flex; align-items: center; justify-content: space-between; }
-.nav-logo {
-  font-family: var(--mono); font-weight: 700; font-size: 0.95rem;
-  color: var(--text); display: flex; align-items: center; gap: 10px;
-  letter-spacing: -0.02em;
-}
-.nav-logo img {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  box-shadow: 0 0 18px var(--accent-glow);
-}
-.nav-logo .accent { color: var(--accent); }
-.nav-links { display: flex; gap: 32px; }
-.nav-links a {
-  color: var(--text-dim); font-size: 0.85rem; font-weight: 500;
-  font-family: var(--mono); letter-spacing: 0.02em;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--text); opacity: 1; }
-
-/* ─── HERO ─── */
-.hero {
-  padding: 180px 0 120px;
-  position: relative;
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-}
-.hero::after {
-  content: '';
-  position: absolute; top: 80px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-eyebrow {
-  font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
-  color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
-  margin-bottom: 24px;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.hero-eyebrow .line { width: 32px; height: 1px; background: var(--accent); }
-
-h1 {
-  font-size: clamp(3.6rem, 8vw, 7rem);
-  font-weight: 800;
-  letter-spacing: -0.055em;
-  line-height: 1.0;
-  margin-bottom: 28px;
-  color: var(--text);
-}
-h1 .thin { font-weight: 300; color: var(--text-secondary); }
-.hero-logo {
-  width: clamp(118px, 17vw, 176px);
-  height: clamp(118px, 17vw, 176px);
-  object-fit: cover;
-  border-radius: 34px;
-  margin: 0 auto 28px;
-  display: block;
-  box-shadow: 0 18px 60px var(--accent-glow), 0 0 0 1px var(--border);
-}
-.hero-title-accent {
-  display: inline-block;
-  color: var(--accent);
-  text-shadow: 0 0 34px var(--accent-glow);
-}
-.hero-title-kicker {
-  display: block;
-  font-family: var(--mono);
-  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-}
-
-.hero-sub {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  max-width: 760px;
-  margin-bottom: 48px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
-}
-
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: -18px 0 42px;
-}
-.hero-stat {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg-surface);
-  color: var(--text-secondary);
-  font-family: var(--mono);
-  font-size: 0.82rem;
-}
-.hero-stat strong { color: var(--text); font-weight: 700; }
-.hero-stat .star { color: var(--amber); }
-
-.hero-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem;
-  border: none; cursor: pointer; transition: all 0.15s;
-  font-family: var(--mono);
-}
-.btn-accent {
-  background: var(--accent); color: #000;
-}
-.btn-accent:hover { background: #33f7ff; transform: translateY(-1px); color: #000; opacity: 1; }
-.btn-ghost {
-  background: transparent; color: var(--text); border: 1px solid var(--border);
-}
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); opacity: 1; }
-
-.providers-row {
-  display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center;
-}
-.providers-row .label {
-  font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
-  text-transform: uppercase; letter-spacing: 0.1em;
-}
-.provider-tag {
-  font-family: var(--mono); font-size: 0.8rem; color: var(--text-secondary);
-  padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.provider-tag .dot { width: 6px; height: 6px; border-radius: 50%; }
-
-/* ─── SECTIONS ─── */
-section { padding: 100px 0; }
-.section-label {
-  font-family: var(--mono); text-transform: uppercase;
-  letter-spacing: 0.15em; font-size: 0.75rem;
-  color: var(--accent); font-weight: 600; margin-bottom: 16px;
-}
-h2 {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px;
-  color: var(--text);
-}
-.section-desc { color: var(--text-secondary); font-size: 1.05rem; max-width: 560px; margin-bottom: 56px; }
-.centered { text-align: center; }
-.centered .section-desc { margin-left: auto; margin-right: auto; }
-
-/* ─── HOW IT WORKS ─── */
-.flow-steps {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; margin-top: 56px;
-}
-.flow-step {
-  background: var(--bg-card); padding: 32px 24px;
-  display: flex; flex-direction: column; gap: 12px;
-  position: relative; transition: background 0.2s;
-}
-.flow-step:hover { background: var(--bg-card-hover); }
-.flow-step .step-num {
-  font-family: var(--mono); font-size: 0.7rem; color: var(--accent);
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
-.flow-step .step-title { font-weight: 600; font-size: 1rem; }
-.flow-step .step-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
-.flow-step .step-arrow {
-  position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
-  color: var(--accent); font-size: 0.9rem; z-index: 2;
-}
-
-@media (max-width: 700px) {
-  .flow-steps { grid-template-columns: 1fr; }
-  .flow-step .step-arrow { display: none; }
-}
-
-/* ─── FEATURES ─── */
-.features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; margin-top: 56px;
-}
-.feature-cell {
-  background: var(--bg-card); padding: 32px 28px;
-  transition: background 0.2s;
-}
-.feature-cell:hover { background: var(--bg-card-hover); }
-.feature-cell .f-label {
-  font-family: var(--mono); font-size: 0.7rem; color: var(--accent);
-  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
-}
-.feature-cell h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-.feature-cell p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
-
-@media (max-width: 700px) {
-  .features-grid { grid-template-columns: 1fr; }
-}
-
-/* ─── PROVIDER TABLE ─── */
-.provider-section { background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.table-wrap {
-  overflow-x: auto; margin-top: 48px;
-  border: 1px solid var(--border); border-radius: var(--radius);
-}
-table { width: 100%; border-collapse: collapse; }
-thead { background: var(--bg-card); }
-th {
-  text-align: left; padding: 14px 20px;
-  font-family: var(--mono); font-size: 0.7rem;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--text-dim); border-bottom: 1px solid var(--border);
-  font-weight: 600;
-}
-td {
-  padding: 14px 20px; border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-tr:last-child td { border-bottom: none; }
-tr:hover td { background: var(--bg-card); }
-td:first-child { font-weight: 600; font-family: var(--mono); font-size: 0.85rem; }
-.api-key {
-  font-family: var(--mono); font-size: 0.78rem;
-  background: var(--bg-code); padding: 3px 8px; border-radius: var(--radius-sm);
-  color: var(--accent); border: 1px solid var(--border);
-}
-.best-for { color: var(--text-secondary); font-size: 0.85rem; }
-
-/* ─── PRODUCTS ─── */
-.products-grid {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px;
-  background: var(--border); border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; margin-top: 56px; width: 100%;
-}
-.product-card {
-  background: var(--bg-card); padding: 36px 24px;
-  display: flex; flex-direction: column; min-width: 0; overflow: hidden;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-.product-card:hover { background: var(--bg-card-hover); }
-.product-card.featured {
-  grid-column: span 2;
-  background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card));
-  box-shadow: inset 0 0 0 1px var(--accent-mid);
-}
-.product-card.featured.primary { box-shadow: inset 0 0 0 1px var(--accent), 0 0 40px rgba(0, 229, 255, 0.08); }
-.product-card.featured .product-title { font-size: 1.35rem; }
-.product-card.featured .product-desc { font-size: 0.95rem; }
-.product-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 8px; flex-wrap: wrap; }
-.product-title {
-  font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
-}
-.product-badge {
-  font-family: var(--mono); display: inline-block; padding: 3px 10px;
-  border-radius: var(--radius-sm); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.03em; white-space: nowrap;
-}
-.badge-green { background: #00e67616; color: var(--green); border: 1px solid #00e67633; }
-.badge-cyan { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
-.badge-amber { background: #ffab0016; color: var(--amber); border: 1px solid #ffab0033; }
-.product-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 24px; line-height: 1.6; flex-grow: 1; }
-.product-install {
-  background: var(--bg-code); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 12px 16px;
-  font-family: var(--mono); font-size: 0.82rem;
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px; gap: 8px;
-}
-.product-install code { color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
-.copy-btn {
-  background: none; border: 1px solid var(--border); color: var(--text-dim);
-  padding: 3px 10px; border-radius: var(--radius-sm); cursor: pointer;
-  font-size: 0.75rem; font-family: var(--mono); transition: all 0.2s;
-  white-space: nowrap;
-}
-.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
-.copy-btn.copied { border-color: var(--green); color: var(--green); }
-.product-link {
-  font-family: var(--mono); font-size: 0.82rem;
-  color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px;
-}
-.product-link:hover { color: var(--accent); opacity: 1; }
-
-@media (max-width: 900px) {
-  .products-grid { grid-template-columns: 1fr; }
-  .product-card.featured { grid-column: span 1; }
-}
-
-/* ─── CODE TABS ─── */
-.code-section { margin-top: 56px; }
-.tab-bar {
-  display: flex; gap: 0; border-bottom: 1px solid var(--border);
-  overflow-x: auto; scrollbar-width: none; flex-wrap: wrap;
-}
-.tab-bar::-webkit-scrollbar { display: none; }
-.tab-btn {
-  padding: 12px 16px; background: none; border: none; color: var(--text-dim);
-  font-size: 0.78rem; font-weight: 600; cursor: pointer;
-  font-family: var(--mono); letter-spacing: 0.02em; white-space: nowrap;
-  border-bottom: 2px solid transparent; transition: all 0.2s;
-}
-.tab-btn:hover { color: var(--text-secondary); }
-.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-.tab-panel {
-  display: none; background: var(--bg-code); border: 1px solid var(--border);
-  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
-  position: relative;
-}
+.nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-family: var(--mono); font-size: .86rem; letter-spacing: -.03em; font-weight: 700; }
+.brand img { width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 0 0 1px var(--line), 0 18px 48px rgba(245,165,36,.18); }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-links a { color: var(--muted); border: 1px solid transparent; border-radius: 999px; padding: 9px 12px; font-size: .82rem; font-weight: 650; }
+.nav-links a:hover { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.04); }
+.hero { padding: clamp(54px, 9vw, 118px) 0 54px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr); gap: clamp(34px, 7vw, 78px); align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; color: var(--accent); font-family: var(--mono); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .75; }
+h1 { margin: 0; max-width: 780px; font-family: var(--serif); font-size: clamp(3.15rem, 13vw, 7.6rem); line-height: .88; letter-spacing: -.075em; font-weight: 900; }
+.hero-mark { color: var(--accent); font-style: italic; }
+.hero-sub { margin: 28px 0 0; max-width: 670px; color: var(--muted); font-size: clamp(1.05rem, 2.8vw, 1.36rem); line-height: 1.58; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.btn { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 13px 19px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--text); font-weight: 800; font-size: .94rem; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+.btn:hover { transform: translateY(-1px); border-color: var(--line-strong); background: rgba(255,255,255,.07); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #101010; box-shadow: 0 18px 60px rgba(245,165,36,.24); }
+.btn-primary:hover { background: #ffc45f; border-color: #ffc45f; }
+.hero-proof { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; color: var(--muted); }
+.pill { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; background: rgba(255,255,255,.035); font-family: var(--mono); font-size: .76rem; white-space: nowrap; }
+.pill strong { color: var(--text); }
+.device-card { position: relative; border: 1px solid var(--line); border-radius: 34px; padding: 18px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); box-shadow: 0 34px 120px rgba(0,0,0,.38); overflow: hidden; }
+.device-card::before { content: ""; position: absolute; inset: -1px; background: radial-gradient(circle at 80% 0%, rgba(245,165,36,.22), transparent 18rem); pointer-events: none; }
+.panel { position: relative; border: 1px solid var(--line); border-radius: 24px; background: rgba(7,9,14,.78); overflow: hidden; }
+.panel-head { display: flex; align-items: center; gap: 7px; padding: 14px 16px; border-bottom: 1px solid var(--line); color: var(--dim); font-family: var(--mono); font-size: .72rem; }
+.dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); box-shadow: 18px 0 #ff6b6b, 36px 0 #48d597; margin-right: 36px; }
+.routing { padding: 18px; display: grid; gap: 10px; }
+.route-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 13px 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.035); }
+.route-title { font-weight: 850; }
+.route-desc { color: var(--muted); font-size: .86rem; margin-top: 2px; }
+.route-badge { color: #101010; background: var(--accent); border-radius: 999px; padding: 5px 8px; font-family: var(--mono); font-size: .7rem; font-weight: 900; white-space: nowrap; }
+.section { padding: 70px 0; }
+.section.alt { border-block: 1px solid var(--line); background: rgba(255,255,255,.025); }
+.section-kicker { color: var(--accent); font-family: var(--mono); font-size: .76rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+h2 { margin: 0; font-size: clamp(2rem, 6.5vw, 4.2rem); line-height: .98; letter-spacing: -.055em; }
+.section-lead { color: var(--muted); max-width: 690px; margin: 18px 0 0; font-size: clamp(1rem, 2.4vw, 1.18rem); }
+.cards { margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); border-radius: var(--radius); padding: 23px; background: rgba(255,255,255,.035); min-width: 0; }
+.card h3 { margin: 0 0 9px; font-size: 1.06rem; }
+.card p { margin: 0; color: var(--muted); font-size: .94rem; }
+.card .num { display: inline-flex; color: var(--accent); font-family: var(--mono); font-size: .72rem; font-weight: 900; letter-spacing: .08em; margin-bottom: 14px; }
+.provider-cloud { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; }
+.provider { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 10px 13px; background: rgba(255,255,255,.035); color: var(--muted); font-family: var(--mono); font-size: .82rem; }
+.provider b { color: var(--text); }
+.provider i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--accent-2); }
+.products { margin-top: 34px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.product { display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025)); min-width: 0; }
+.product.featured { border-color: rgba(245,165,36,.45); box-shadow: inset 0 0 0 1px rgba(245,165,36,.12), 0 28px 90px rgba(245,165,36,.08); }
+.product-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.product-title { margin: 0; font-size: 1.22rem; }
+.badge { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; color: var(--accent); background: rgba(245,165,36,.1); font-family: var(--mono); font-size: .72rem; font-weight: 900; }
+.product p { margin: 0; color: var(--muted); }
+.install { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.24); padding: 12px; }
+.install code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent-2); font-family: var(--mono); font-size: .82rem; }
+.copy { min-height: 36px; border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.05); border-radius: 999px; padding: 6px 11px; cursor: pointer; font-family: var(--mono); font-size: .75rem; font-weight: 850; }
+.copy:hover, .copy.copied { border-color: var(--accent); color: var(--accent); }
+.links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
+.links a { color: var(--muted); font-family: var(--mono); font-size: .82rem; }
+.links a:hover { color: var(--accent); }
+.quickstart { margin-top: 34px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.035); }
+.tabs { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 0 0 auto; min-height: 48px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--muted); padding: 12px 16px; cursor: pointer; font-family: var(--mono); font-size: .8rem; font-weight: 850; }
+.tab.active { color: #101010; background: var(--accent); }
+.tab-panel { display: none; position: relative; }
 .tab-panel.active { display: block; }
-.tab-panel pre {
-  padding: 24px; overflow-x: auto;
-  font-family: var(--mono); font-size: 0.85rem;
-  line-height: 1.8; color: var(--text);
+pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-family: var(--mono); font-size: .86rem; line-height: 1.75; }
+.tab-copy { position: absolute; top: 12px; right: 12px; }
+.code-comment { color: var(--dim); }
+.updates { margin-top: 34px; display: grid; gap: 12px; max-width: 780px; }
+.update { display: grid; gap: 8px; border-left: 2px solid var(--accent); padding: 4px 0 4px 18px; }
+.update-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-family: var(--mono); font-size: .78rem; }
+.update-meta b { color: var(--accent); }
+.update-meta span { color: var(--dim); }
+.update p { margin: 0; color: var(--muted); }
+.footer { border-top: 1px solid var(--line); padding: 36px 0; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.footer-links a { color: var(--dim); font-family: var(--mono); font-size: .82rem; }
+.footer-links a:hover { color: var(--accent); }
+.fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.fade.visible { opacity: 1; transform: translateY(0); }
+@media (max-width: 860px) {
+  .container { width: min(100% - 32px, 1120px); }
+  .nav-inner { height: 62px; }
+  .nav-links a:nth-child(n+3) { display: none; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .device-card { order: -1; max-width: 520px; margin: 0 auto; }
+  .cards, .products { grid-template-columns: 1fr; }
+  .section { padding: 56px 0; }
 }
-.tab-copy {
-  position: absolute; top: 12px; right: 12px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  color: var(--text-dim); padding: 5px 12px; border-radius: var(--radius-sm);
-  cursor: pointer; font-size: 0.75rem; font-family: var(--mono); transition: all 0.2s;
-}
-.tab-copy:hover { border-color: var(--accent); color: var(--accent); }
-.tab-copy.copied { border-color: var(--green); color: var(--green); }
-
-/* Syntax */
-.kw { color: #ff6b6b; }
-.str { color: var(--green); }
-.key { color: var(--accent); }
-.cmt { color: var(--text-dim); font-style: italic; }
-
-/* Theme toggle */
-.theme-toggle {
-  background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  color: var(--text); padding: 6px 10px; cursor: pointer; font-size: 0.9rem;
-  transition: border-color 0.2s; line-height: 1;
-}
-.theme-toggle:hover { border-color: var(--border-hover); }
-
-/* ─── QUICKSTART ─── */
-.quickstart-section { background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-/* ─── FOOTER ─── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 48px 0; text-align: center;
-}
-.footer-links { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
-.footer-links a {
-  color: var(--text-dim); font-size: 0.82rem; font-weight: 500;
-  font-family: var(--mono); letter-spacing: 0.02em;
-}
-.footer-links a:hover { color: var(--accent); opacity: 1; }
-
-/* ─── ANIMATIONS ─── */
-.fade-up {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-
-/* ─── RESPONSIVE NAV ─── */
-@media (max-width: 600px) {
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 0.78rem; }
-  .hero { padding: 140px 0 80px; }
-  h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
-  .providers-row { gap: 10px; }
+@media (max-width: 560px) {
+  .container { width: min(100% - 28px, 1120px); }
+  .brand span { max-width: 168px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-links a:not(:first-child) { display: none; }
+  .hero { padding-top: 34px; }
+  h1 { font-size: clamp(3.05rem, 16vw, 4.85rem); }
+  .hero-sub { margin-top: 22px; }
+  .hero-actions { display: grid; grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .pill { max-width: 100%; white-space: normal; }
+  .device-card { padding: 12px; border-radius: 26px; }
+  .route-row { grid-template-columns: 1fr; }
+  .route-badge { justify-self: start; }
+  .product { padding: 20px; }
+  .product-head { flex-direction: column; }
+  .install { grid-template-columns: 1fr; }
+  .install code { white-space: normal; overflow-wrap: anywhere; }
+  .copy { min-height: 44px; width: 100%; }
+  .tab { min-height: 50px; padding: 12px 14px; }
+  pre { padding: 58px 16px 20px; font-size: .78rem; }
 }
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="container">
-    <div class="nav-logo"><img src="/assets/web-search-plus-icon-192.png" alt="" aria-hidden="true"><span>web-search-plus</span></div>
+<nav class="nav" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Web Search Plus home"><img src="/assets/web-search-plus-icon-192.png" alt=""><span>web-search-plus</span></a>
     <div class="nav-links">
-      <a href="#how-it-works">How it works</a>
+      <a href="#how">How</a>
+      <a href="#install">Install</a>
       <a href="#providers">Providers</a>
-      <a href="#products">Install</a>
-      <a href="#quickstart">Quick start</a>
+      <a href="#quickstart">Quickstart</a>
       <a href="#updates">Updates</a>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-      <span class="theme-icon">🌙</span>
-    </button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-eyebrow"><span class="line"></span> Hermes Agent flagship plugin</div>
-    <img class="hero-logo" src="/assets/web-search-plus-logo.png" alt="Web Search Plus logo">
-    <h1><span class="hero-title-kicker">Hermes</span><span class="hero-title-accent">Web Search</span><br><span class="thin">Plus</span></h1>
-    <p class="hero-sub">Intent-aware web search, extraction, and answer grounding for Hermes Agent — with OpenClaw and MCP integrations using the same routing engine.</p>
-    <div class="hero-stats" aria-label="Project stats">
-      <span class="hero-stat"><span class="star">★</span> <strong>167</strong> GitHub stars</span>
-      <span class="hero-stat"><strong>10+</strong> search providers</span>
-      <span class="hero-stat"><strong>5</strong> extract providers</span>
-      <span class="hero-stat">Routing · fallback · research mode</span>
-    </div>
-    <div class="hero-actions">
-      <a href="#quickstart-hermes" class="btn btn-accent" data-open-tab="hermes">Install for Hermes →</a>
-      <a href="#quickstart-plugin" class="btn btn-ghost" data-open-tab="plugin">OpenClaw Plugin →</a>
-      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="btn btn-ghost" target="_blank">GitHub ★ 167 →</a>
-    </div>
-    <div class="providers-row">
-      <span class="label">Routes to</span>
-      <span class="provider-tag"><span class="dot" style="background:#4285f4"></span> Serper</span>
-      <span class="provider-tag"><span class="dot" style="background:#fb542b"></span> Brave</span>
-      <span class="provider-tag"><span class="dot" style="background:#06b6d4"></span> Tavily</span>
-      <span class="provider-tag"><span class="dot" style="background:#f59e0b"></span> Exa</span>
-      <span class="provider-tag"><span class="dot" style="background:#a855f6"></span> Querit</span>
-      <span class="provider-tag"><span class="dot" style="background:#10b981"></span> Linkup</span>
-      <span class="provider-tag"><span class="dot" style="background:#f97316"></span> Firecrawl</span>
-      <span class="provider-tag"><span class="dot" style="background:#38bdf8"></span> Perplexity</span>
-      <span class="provider-tag"><span class="dot" style="background:#8b5cf6"></span> Kilo Perplexity</span>
-      <span class="provider-tag"><span class="dot" style="background:#ef4444"></span> You.com</span>
-      <span class="provider-tag"><span class="dot" style="background:#22c55e"></span> SearXNG</span>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how-it-works">
-  <div class="container centered">
-    <div class="fade-up">
-      <div class="section-label">How it works</div>
-      <h2>Smart routing, zero config</h2>
-      <p class="section-desc">Analyzes query intent and selects the best provider. No manual switching, no guesswork.</p>
-    </div>
-    <div class="flow-steps fade-up">
-      <div class="flow-step">
-        <div class="step-num">01 — Input</div>
-        <div class="step-title">Your Query</div>
-        <div class="step-desc">"How does RLHF work?"</div>
-        <div class="step-arrow">→</div>
+<header id="top" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Agentic web search</p>
+      <h1>One search.<br><span class="hero-mark">Every source.</span></h1>
+      <p class="hero-sub">Web Search Plus routes live web search and URL extraction across the right providers — for Hermes Agent, OpenClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
+        <a class="btn" href="#quickstart" data-open-tab="hermes">Hermes setup →</a>
+        <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★ 182</a>
       </div>
-      <div class="flow-step">
-        <div class="step-num">02 — Analyze</div>
-        <div class="step-title">Query Analyzer</div>
-        <div class="step-desc">Intent detection &amp; confidence scoring</div>
-        <div class="step-arrow">→</div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">03 — Route</div>
-        <div class="step-title">Best Provider</div>
-        <div class="step-desc">Tavily selected (research query)</div>
-        <div class="step-arrow">→</div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num">04 — Output</div>
-        <div class="step-title">Results</div>
-        <div class="step-desc">Structured, ranked, ready to use</div>
+      <div class="hero-proof" aria-label="Project highlights">
+        <span class="pill"><strong>12</strong> search providers</span>
+        <span class="pill"><strong>5</strong> extraction providers</span>
+        <span class="pill">routing · fallback · quality reports</span>
       </div>
     </div>
-
-    <div class="features-grid fade-up" style="margin-top: 64px;">
-      <div class="feature-cell">
-        <div class="f-label">Routing</div>
-        <h3>Zero Config</h3>
-        <p>Automatically picks the right provider based on query intent. Research → Tavily. Shopping → Serper/Brave. Neural discovery → Exa. Extraction → Tavily first, then Exa/Linkup/Firecrawl fallback.</p>
-      </div>
-      <div class="feature-cell">
-        <div class="f-label">Resilience</div>
-        <h3>Graceful Fallback</h3>
-        <p>If one provider is down or key is missing, seamlessly falls back to the next best option. Research mode keeps partial results instead of nuking the whole answer.</p>
-      </div>
-      <div class="feature-cell">
-        <div class="f-label">Diagnostics</div>
-        <h3>Quality Reports</h3>
-        <p>Optional quality reports show routing decisions, provider errors, result counts, and why a provider was chosen — useful diagnostics without changing normal behavior.</p>
-      </div>
-      <div class="feature-cell">
-        <div class="f-label">Research Mode</div>
-        <h3>Budget-Limited Depth</h3>
-        <p>Opt in with <code>mode=&quot;research&quot;</code> and <code>research_time_budget</code>. It searches first, extracts second, and skips expensive work when the budget is gone.</p>
-      </div>
-      <div class="feature-cell">
-        <div class="f-label">Lean Surface</div>
-        <h3>Search + Extract</h3>
-        <p>v2.1 keeps the public tool surface focused: <code>web_search_plus</code> for source discovery and <code>web_extract_plus</code> for URL content. Synthesis belongs in the host agent, not a second web tool pipeline.</p>
+    <div class="device-card" aria-label="Routing preview">
+      <div class="panel">
+        <div class="panel-head"><span class="dot"></span>routing-preview.json</div>
+        <div class="routing">
+          <div class="route-row"><div><div class="route-title">latest model pricing</div><div class="route-desc">fresh broad query</div></div><span class="route-badge">Brave</span></div>
+          <div class="route-row"><div><div class="route-title">compare RAG papers</div><div class="route-desc">research query</div></div><span class="route-badge">Tavily</span></div>
+          <div class="route-row"><div><div class="route-title">extract docs URL</div><div class="route-desc">content fetch + fallback</div></div><span class="route-badge">Exa → Linkup</span></div>
+          <div class="route-row"><div><div class="route-title">similar OSS projects</div><div class="route-desc">semantic discovery</div></div><span class="route-badge">Exa</span></div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- PROVIDERS -->
-<section id="providers" class="provider-section">
-  <div class="container centered">
-    <div class="fade-up">
-      <div class="section-label">Providers</div>
-      <h2>Provider-aware search, one interface</h2>
-      <p class="section-desc">Each provider excels at different query types. Web Search Plus knows which one to call.</p>
-    </div>
-    <div class="table-wrap fade-up">
-      <table>
-        <thead>
-          <tr><th>Provider</th><th>Best for</th><th>Config Key</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="dot" style="background:#4285f4;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Serper</td>
-            <td class="best-for">Google results, shopping, news, local</td>
-            <td><code class="api-key">SERPER_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#fb542b;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Brave</td>
-            <td class="best-for">General web search, privacy-minded fallback, fresh broad results</td>
-            <td><code class="api-key">BRAVE_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#06b6d4;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Tavily</td>
-            <td class="best-for">Research, deep analysis, "how does X work"</td>
-            <td><code class="api-key">TAVILY_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#f59e0b;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Exa</td>
-            <td class="best-for">Discovery, "similar to", neural search</td>
-            <td><code class="api-key">EXA_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#a855f6;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Querit</td>
-            <td class="best-for">Multilingual queries, AI-native search</td>
-            <td><code class="api-key">QUERIT_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#10b981;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Linkup</td>
-            <td class="best-for">Citation-backed answers, fact-checking, grounded search</td>
-            <td><code class="api-key">LINKUP_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#f97316;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Firecrawl</td>
-            <td class="best-for">Web discovery with scrape-ready structured content</td>
-            <td><code class="api-key">FIRECRAWL_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#38bdf8;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Perplexity</td>
-            <td class="best-for">Direct AI answers, summarized results</td>
-            <td><code class="api-key">PERPLEXITY_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#8b5cf6;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>Kilo Perplexity</td>
-            <td class="best-for">Kilo gateway route for Perplexity-style answer results</td>
-            <td><code class="api-key">KILOCODE_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#ef4444;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>You.com</td>
-            <td class="best-for">RAG, real-time web, code snippets</td>
-            <td><code class="api-key">YOU_API_KEY</code></td>
-          </tr>
-          <tr>
-            <td><span class="dot" style="background:#22c55e;display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle"></span>SearXNG</td>
-            <td class="best-for">Privacy-first, self-hosted, no API key</td>
-            <td><code class="api-key">SEARXNG_INSTANCE_URL</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="container centered">
-    <div class="fade-up">
-      <div class="section-label">Install</div>
-      <h2>Start with Hermes or OpenClaw Plugin</h2>
-      <p class="section-desc">Primary installs first. Skill and MCP stay available, but the flagship paths are Hermes Agent and the native OpenClaw Plugin.</p>
-    </div>
-    <div class="products-grid fade-up">
-      <!-- Hermes Agent -->
-      <div class="product-card featured primary">
-        <div class="product-header">
-          <div class="product-title">Hermes Agent</div>
-          <span class="product-badge badge-cyan">v2.1.0</span>
-        </div>
-        <p class="product-desc">Hermes Agent plugin with <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>. v2.1 removes the old answer tool, ships Routing v2 as the stable default, and uses Tavily-first extraction with Exa, Linkup, Firecrawl, and You.com fallback. Search remains the recommended default for current events, sports lineups, weather, prices, and source discovery.</p>
-        <div class="product-install">
-          <code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code>
-          <button class="copy-btn" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button>
-        </div>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" class="product-link" target="_blank">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.1.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v2.1.0 →</a>
-      </div>
-      <!-- OpenClaw Plugin -->
-      <div class="product-card featured">
-        <div class="product-header">
-          <div class="product-title">OpenClaw Plugin</div>
-          <span class="product-badge badge-amber">v2.6.0</span>
-        </div>
-        <p class="product-desc">Registers <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search_plus</code>, <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract_plus</code>, and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_routing_config_plus</code> as native OpenClaw tools. Expanded provider coverage includes Kilo Perplexity and SearXNG, strict explicit-provider behavior, in-memory routing preferences, and URL extraction across 5 providers (Tavily, Exa, Linkup, Firecrawl, You.com).</p>
-        <div class="product-install">
-          <code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code>
-          <button class="copy-btn" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button>
-        </div>
-        <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" class="product-link" target="_blank">View on ClawHub →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">GitHub →</a>
-      </div>
-      <!-- OpenClaw Skill -->
-      <div class="product-card">
-        <div class="product-header">
-          <div class="product-title">OpenClaw Skill</div>
-          <span class="product-badge badge-green">v3.0.1</span>
-        </div>
-        <p class="product-desc">OpenClaw Skill with 10 search providers, smart routing, fallback, caching, setup scripts, and URL extraction via <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">scripts/extract.py</code>. Best for portable skill workflows and CLI-driven agents.</p>
-        <div class="product-install">
-          <code>openclaw skills install web-search-plus</code>
-          <button class="copy-btn" onclick="copyText('openclaw skills install web-search-plus', this)">Copy</button>
-        </div>
-        <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" class="product-link" target="_blank">View on ClawHub →</a>
-      </div>
-      <!-- MCP Server -->
-      <div class="product-card">
-        <div class="product-header">
-          <div class="product-title">MCP Server</div>
-          <span class="product-badge badge-cyan">PyPI v0.8.0</span>
-        </div>
-        <p class="product-desc">Standalone Python MCP server synced with the Web Search Plus Routing v2 engine. Exposes stable <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_search</code> and <code style="color:var(--accent);font-family:var(--mono);font-size:0.85em">web_extract</code>, 12 search providers, Tavily-first extraction, quality reports, opt-in research mode, and routing config commands. The v0.8 line removes the old beta web_answer surface to match Hermes v2.1.</p>
-        <div class="product-install">
-          <code>uvx web-search-plus-mcp</code>
-          <button class="copy-btn" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button>
-        </div>
-        <a href="https://pypi.org/project/web-search-plus-mcp/0.8.0/" class="product-link" target="_blank">PyPI →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">GitHub →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/releases/tag/v0.8.0" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Release v0.8.0 →</a>
-        <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp/blob/main/CHANGELOG.md" class="product-link" target="_blank" style="margin-top:4px;opacity:0.7;font-size:0.85em">Changelog →</a>
+<main>
+  <section id="how" class="section">
+    <div class="container">
+      <p class="section-kicker">Why it exists</p>
+      <h2>Stop hardcoding one search backend.</h2>
+      <p class="section-lead">Agents need different sources for different jobs. Web Search Plus picks the route, keeps fallbacks warm, and returns clean structured results without turning every project into provider glue code.</p>
+      <div class="cards">
+        <article class="card fade"><span class="num">01</span><h3>Intent routing</h3><p>Research, shopping, news, local, semantic discovery and extraction each get routed to providers that are actually good at that job.</p></article>
+        <article class="card fade"><span class="num">02</span><h3>Failure-tolerant</h3><p>Missing key, provider hiccup or empty result? It falls through instead of making the agent faceplant like a demo on conference Wi‑Fi.</p></article>
+        <article class="card fade"><span class="num">03</span><h3>Debuggable</h3><p>Quality reports explain provider choice, errors, result counts, timing and extraction path when you need receipts.</p></article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- QUICKSTART -->
-<section id="quickstart" class="quickstart-section">
-  <div class="container centered">
-    <div class="fade-up">
-      <div class="section-label">Quick start</div>
-      <h2>Up and running in seconds</h2>
-      <p class="section-desc">Pick your setup and paste. That's it.</p>
+  <section id="providers" class="section alt">
+    <div class="container">
+      <p class="section-kicker">Provider mesh</p>
+      <h2>Coverage without the mess.</h2>
+      <p class="section-lead">Use one interface; route across search, discovery, extraction and self-hosted privacy paths.</p>
+      <div class="provider-cloud fade" aria-label="Supported providers">
+        <span class="provider"><i style="background:#4285f4"></i><b>Serper</b> Google-style results</span>
+        <span class="provider"><i style="background:#fb542b"></i><b>Brave</b> broad web</span>
+        <span class="provider"><i style="background:#06b6d4"></i><b>Tavily</b> research</span>
+        <span class="provider"><i style="background:#f59e0b"></i><b>Exa</b> semantic discovery</span>
+        <span class="provider"><i style="background:#a855f6"></i><b>Querit</b> multilingual</span>
+        <span class="provider"><i style="background:#10b981"></i><b>Linkup</b> grounded citations</span>
+        <span class="provider"><i style="background:#f97316"></i><b>Firecrawl</b> scrape-ready content</span>
+        <span class="provider"><i style="background:#38bdf8"></i><b>Perplexity</b> summarized web</span>
+        <span class="provider"><i style="background:#8b5cf6"></i><b>Kilo Perplexity</b> gateway route</span>
+        <span class="provider"><i style="background:#ef4444"></i><b>You.com</b> web + code</span>
+        <span class="provider"><i style="background:#22c55e"></i><b>SearXNG</b> self-hosted</span>
+      </div>
     </div>
-    <div class="code-section fade-up">
-      <span id="quickstart-hermes" aria-hidden="true"></span>
-      <span id="quickstart-plugin" aria-hidden="true"></span>
-      <div class="tab-bar">
-        <button class="tab-btn active" data-tab="hermes">Hermes Agent</button>
-        <button class="tab-btn" data-tab="plugin">OpenClaw Plugin</button>
-        <button class="tab-btn" data-tab="openclaw">OpenClaw Skill</button>
-        <button class="tab-btn" data-tab="claude">Claude Desktop</button>
-        <button class="tab-btn" data-tab="cursor">Cursor</button>
-        <button class="tab-btn" data-tab="nanobot">NanoBot</button>
-      </div>
-      <div id="tab-openclaw" class="tab-panel">
-        <button class="tab-copy" onclick="copyTab('openclaw', this)">Copy</button>
-        <pre><span class="cmt"># Install the OpenClaw Skill (v3.0.1)</span>
-openclaw skills install web-search-plus
+  </section>
 
-<span class="cmt"># Add at least one provider key or SearXNG URL</span>
-SERPER_API_KEY=your-serper-key
-BRAVE_API_KEY=your-brave-key
-TAVILY_API_KEY=your-tavily-key
-LINKUP_API_KEY=your-linkup-key
-FIRECRAWL_API_KEY=your-firecrawl-key
-EXA_API_KEY=your-exa-key
-QUERIT_API_KEY=your-querit-key
-PERPLEXITY_API_KEY=your-perplexity-key
-
-<span class="cmt"># Search + extraction are available through scripts/search.py and scripts/extract.py.</span></pre>
+  <section id="install" class="section">
+    <div class="container">
+      <p class="section-kicker">Install paths</p>
+      <h2>Pick your runtime.</h2>
+      <p class="section-lead">OpenClaw Plugin and Hermes are the flagship paths. The MCP server keeps every other client on the same routing engine.</p>
+      <div class="products">
+        <article class="product featured fade">
+          <div class="product-head"><h3 class="product-title">OpenClaw Plugin</h3><span class="badge">latest</span></div>
+          <p>Native OpenClaw tools: <code>web_search_plus</code>, <code>web_extract_plus</code> and <code>web_routing_config_plus</code>. Best default for Cami/OpenClaw workflows.</p>
+          <div class="install"><code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code><button class="copy" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button></div>
+          <div class="links"><a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" target="_blank" rel="noopener">GitHub →</a></div>
+        </article>
+        <article class="product featured fade">
+          <div class="product-head"><h3 class="product-title">Hermes Agent</h3><span class="badge">v2.1.0</span></div>
+          <p>Hermes plugin exposing <code>web_search_plus</code> and <code>web_extract_plus</code>, with Routing v2, quality reports and budget-limited research mode.</p>
+          <div class="install"><code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code><button class="copy" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button></div>
+          <div class="links"><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub →</a><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.1.0" target="_blank" rel="noopener">Release →</a></div>
+        </article>
+        <article class="product fade">
+          <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">PyPI v0.8.0</span></div>
+          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Same routing engine, stable search and extraction tools.</p>
+          <div class="install"><code>uvx web-search-plus-mcp</code><button class="copy" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button></div>
+          <div class="links"><a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">GitHub →</a></div>
+        </article>
+        <article class="product fade">
+          <div class="product-head"><h3 class="product-title">OpenClaw Skill</h3><span class="badge">v3.0.1</span></div>
+          <p>Portable skill workflow with search scripts, extraction script, cache, setup helpers and provider fallback for CLI-driven agents.</p>
+          <div class="install"><code>openclaw skills install web-search-plus</code><button class="copy" onclick="copyText('openclaw skills install web-search-plus', this)">Copy</button></div>
+          <div class="links"><a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank" rel="noopener">ClawHub →</a></div>
+        </article>
       </div>
-      <div id="tab-plugin" class="tab-panel">
-        <button class="tab-copy" onclick="copyTab('plugin', this)">Copy</button>
-        <pre><span class="cmt"># Install from ClawHub (v2.6.0)</span>
+    </div>
+  </section>
+
+  <section id="quickstart" class="section alt">
+    <div class="container">
+      <p class="section-kicker">Quickstart</p>
+      <h2>Paste once, search everywhere.</h2>
+      <p class="section-lead">Choose your client. Copy button included because typing config JSON on mobile is cruel and unusual punishment.</p>
+      <div class="quickstart fade">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="plugin" role="tab">OpenClaw</button>
+          <button class="tab" data-tab="hermes" role="tab">Hermes</button>
+          <button class="tab" data-tab="claude" role="tab">Claude</button>
+          <button class="tab" data-tab="cursor" role="tab">Cursor</button>
+          <button class="tab" data-tab="nanobot" role="tab">NanoBot</button>
+        </div>
+        <div id="tab-plugin" class="tab-panel active" role="tabpanel"><button class="copy tab-copy" onclick="copyTab('plugin', this)">Copy</button><pre><span class="code-comment"># OpenClaw Plugin</span>
 openclaw plugins install clawhub:web-search-plus-plugin-v2
 
-<span class="cmt"># Configure at least one provider in OpenClaw plugin config</span>
-plugins.entries.web-search-plus-plugin-v2.config.serperApiKey=your-serper-key
+<span class="code-comment"># Configure at least one provider key in plugin config</span>
 plugins.entries.web-search-plus-plugin-v2.config.braveApiKey=your-brave-key
 plugins.entries.web-search-plus-plugin-v2.config.tavilyApiKey=your-tavily-key
-plugins.entries.web-search-plus-plugin-v2.config.linkupApiKey=your-linkup-key
-plugins.entries.web-search-plus-plugin-v2.config.firecrawlApiKey=your-firecrawl-key
 plugins.entries.web-search-plus-plugin-v2.config.exaApiKey=your-exa-key
-plugins.entries.web-search-plus-plugin-v2.config.kilocodeApiKey=your-kilocode-key
-plugins.entries.web-search-plus-plugin-v2.config.youApiKey=your-you-key
-plugins.entries.web-search-plus-plugin-v2.config.searxngInstanceUrl=https://your-searxng.example
-
-<span class="cmt"># Optional: isolate in-memory routing preferences by namespace</span>
-plugins.entries.web-search-plus-plugin-v2.config.routingConfigPath=memory:default
-
-<span class="cmt"># Done! web_search_plus, web_extract_plus, and web_routing_config_plus are native tools.</span></pre>
-      </div>
-      <div id="tab-hermes" class="tab-panel active">
-        <button class="tab-copy" onclick="copyTab('hermes', this)">Copy</button>
-        <pre><span class="cmt"># 1) Install + enable the Hermes plugin</span>
+plugins.entries.web-search-plus-plugin-v2.config.linkupApiKey=your-linkup-key</pre></div>
+        <div id="tab-hermes" class="tab-panel" role="tabpanel"><button class="copy tab-copy" onclick="copyTab('hermes', this)">Copy</button><pre><span class="code-comment"># Hermes Agent</span>
 hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable
-
-<span class="cmt"># 2) Configure provider keys with the standalone setup wizard</span>
-python ~/.hermes/plugins/web-search-plus/setup.py status
 python ~/.hermes/plugins/web-search-plus/setup.py setup
 
-<span class="cmt"># Optional routing preferences: fixed provider, priority, fallback, disable/enable</span>
-python ~/.hermes/plugins/web-search-plus/setup.py config show
-python ~/.hermes/plugins/web-search-plus/setup.py config set-default brave
-python ~/.hermes/plugins/web-search-plus/setup.py config set-routing on
-
-<span class="cmt"># Optional short starter preset</span>
-python ~/.hermes/plugins/web-search-plus/setup.py setup --preset starter
-
-<span class="cmt"># 3) Restart/reload so plugin tools register</span>
-# CLI: exit and start `hermes` again, or use /reset
-# Gateway/Telegram: /restart, then /reset
-
-<span class="cmt"># 4) Optional shell smoke test</span>
-cd ~/.hermes/plugins/web-search-plus
-python3 search.py --query "Hermes Agent latest release" --provider auto --quality-report</pre>
-      </div>
-      <div id="tab-claude" class="tab-panel">
-        <button class="tab-copy" onclick="copyTab('claude', this)">Copy</button>
-        <pre><span class="cmt">// ~/Library/Application Support/Claude/claude_desktop_config.json</span>
-{
-  <span class="key">"mcpServers"</span>: {
-    <span class="key">"web-search-plus"</span>: {
-      <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
-      <span class="key">"env"</span>: {
-        <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"EXA_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"BRAVE_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"LINKUP_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"QUERIT_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"PERPLEXITY_API_KEY"</span>: <span class="str">"your-key"</span>
+<span class="code-comment"># Restart/reload Hermes, then use:</span>
+web_search_plus(query="latest AI model releases", quality_report=true)
+web_extract_plus(urls=["https://example.com/docs"])</pre></div>
+        <div id="tab-claude" class="tab-panel" role="tabpanel"><button class="copy tab-copy" onclick="copyTab('claude', this)">Copy</button><pre>{
+  "mcpServers": {
+    "web-search-plus": {
+      "command": "uvx",
+      "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],
+      "env": {
+        "BRAVE_API_KEY": "your-key",
+        "TAVILY_API_KEY": "your-key",
+        "EXA_API_KEY": "your-key",
+        "LINKUP_API_KEY": "your-key"
       }
     }
   }
-}</pre>
-      </div>
-      <div id="tab-cursor" class="tab-panel">
-        <button class="tab-copy" onclick="copyTab('cursor', this)">Copy</button>
-        <pre><span class="cmt">// ~/.cursor/mcp.json</span>
-{
-  <span class="key">"mcpServers"</span>: {
-    <span class="key">"web-search-plus"</span>: {
-      <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-      <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
-      <span class="key">"env"</span>: {
-        <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"EXA_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"BRAVE_API_KEY"</span>: <span class="str">"your-key"</span>,
-        <span class="key">"LINKUP_API_KEY"</span>: <span class="str">"your-key"</span>
+}</pre></div>
+        <div id="tab-cursor" class="tab-panel" role="tabpanel"><button class="copy tab-copy" onclick="copyTab('cursor', this)">Copy</button><pre>{
+  "mcpServers": {
+    "web-search-plus": {
+      "command": "uvx",
+      "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],
+      "env": {
+        "BRAVE_API_KEY": "your-key",
+        "TAVILY_API_KEY": "your-key",
+        "EXA_API_KEY": "your-key"
       }
     }
   }
-}</pre>
-      </div>
-      <div id="tab-nanobot" class="tab-panel">
-        <button class="tab-copy" onclick="copyTab('nanobot', this)">Copy</button>
-        <pre><span class="cmt">// ~/.nanobot/config.json</span>
-{
-  <span class="key">"tools"</span>: {
-    <span class="key">"mcpServers"</span>: {
-      <span class="key">"web-search-plus"</span>: {
-        <span class="key">"command"</span>: <span class="str">"uvx"</span>,
-        <span class="key">"args"</span>: [<span class="str">"--from"</span>, <span class="str">"web-search-plus-mcp==0.8.0"</span>, <span class="str">"web-search-plus-mcp"</span>],
-        <span class="key">"env"</span>: {
-          <span class="key">"SERPER_API_KEY"</span>: <span class="str">"your-key"</span>,
-          <span class="key">"TAVILY_API_KEY"</span>: <span class="str">"your-key"</span>,
-          <span class="key">"EXA_API_KEY"</span>: <span class="str">"your-key"</span>,
-          <span class="key">"BRAVE_API_KEY"</span>: <span class="str">"your-key"</span>,
-          <span class="key">"LINKUP_API_KEY"</span>: <span class="str">"your-key"</span>
+}</pre></div>
+        <div id="tab-nanobot" class="tab-panel" role="tabpanel"><button class="copy tab-copy" onclick="copyTab('nanobot', this)">Copy</button><pre>{
+  "tools": {
+    "mcpServers": {
+      "web-search-plus": {
+        "command": "uvx",
+        "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],
+        "env": {
+          "BRAVE_API_KEY": "your-key",
+          "TAVILY_API_KEY": "your-key"
         }
       }
     }
   }
-}</pre>
+}</pre></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- RECENT UPDATES -->
-<section id="updates" style="padding:100px 0;border-top:1px solid var(--border)">
-  <div class="container centered">
-    <div class="fade-up">
-      <div class="section-label">What's new</div>
-      <h2>Recent Updates</h2>
-      <p class="section-desc">Latest improvements across the Web Search Plus ecosystem.</p>
-    </div>
-    <div style="max-width:640px;margin:48px auto 0;text-align:left">
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">MCP v0.8.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 16, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">MCP v0.8.0 syncs with Web Search Plus v2.1: stable web_search + web_extract only, beta web_answer removed, and extraction now defaults to Tavily → Exa → Linkup → Firecrawl → You.com.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Skill v3.0.1</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 3, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Major OpenClaw Skill release: Brave, Linkup, and Firecrawl search providers, 10-provider routing parity, and URL extraction via scripts/extract.py with fallback across Firecrawl, Linkup, Exa, Tavily, and You.com.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Plugin v2.6.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 16, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">OpenClaw Plugin v2.6.0 adds Kilo Perplexity and SearXNG coverage, strict explicit-provider behavior, and <code>web_routing_config_plus</code> for scanner-safe in-memory routing preferences.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v2.1.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 10, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Hermes plugin v2.1.0 trims the surface to <code>web_search_plus</code> + <code>web_extract_plus</code>, removes answer-mode duplication, and sets the benchmark-backed extraction order to Tavily → Exa → Linkup → Firecrawl → You.com.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">v2.9.3</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">Apr 20, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Docker-aware SearXNG auto-detection. Zero-config local setups in sandboxed environments.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">v2.9.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">Mar 12, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">7th provider: Querit (multilingual AI search, 300B pages). Fallback chain fix. Perplexity citations with real titles. German locale routing.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">v2.8.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">Feb 20, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">6th provider: Perplexity (AI-synthesized answers with citations). Major routing rebalance — research &amp; discovery providers now win on ambiguous queries.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">v2.7.0</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">Feb 14, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Provider health tracking with exponential cooldown. Result caching (1h TTL, zero-cost repeats). Cross-provider deduplication.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Plugin v2.3.1</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">May 3, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">OpenClaw plugin patch release: clean ClawHub scan metadata for the Brave Search provider release, deterministic Brave/Serper routing parity, stabilized nested cache keys, fallback coverage, clean ClawHub provenance, and 26 passing tests.</p>
-      </div>
-      <div class="fade-up" style="border-left:2px solid var(--accent);padding:16px 0 16px 24px;margin-bottom:24px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--accent);font-weight:600">Hermes v1.3.1</span>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dim)">Apr 23, 2026</span>
-        </div>
-        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6">Plugin .env fix for API key loading. Hermes virtualenv setup docs. MIT license added.</p>
+  <section id="updates" class="section">
+    <div class="container">
+      <p class="section-kicker">Current state</p>
+      <h2>Fresh, not fossilized.</h2>
+      <p class="section-lead">The page now reflects the lean surface: search plus extraction. No duplicate synthesis-tool copy, no stale hero metrics.</p>
+      <div class="updates fade">
+        <article class="update"><div class="update-meta"><b>MCP v0.8.0</b><span>May 16, 2026</span></div><p>Stable <code>web_search</code> and <code>web_extract</code>, synced with Routing v2 and the Tavily → Exa → Linkup → Firecrawl → You.com extraction fallback.</p></article>
+        <article class="update"><div class="update-meta"><b>Hermes v2.1.0</b><span>May 16, 2026</span></div><p>Focused tool surface for <code>web_search_plus</code> and <code>web_extract_plus</code>, plus quality diagnostics and research mode.</p></article>
+        <article class="update"><div class="update-meta"><b>OpenClaw Plugin</b><span>latest path</span></div><p>Native OpenClaw install with routing preferences, provider fallback and extraction support.</p></article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank">GitHub</a>
-      <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank">PyPI</a>
-      <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank">ClawHub Skill</a>
-      <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank">ClawHub Plugin</a>
-      <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.1.0" target="_blank">Hermes v2.1.0</a>
-      <a href="https://openclaw.ai" target="_blank">OpenClaw</a>
-    </div>
+<footer class="footer">
+  <div class="container footer-links">
+    <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">Hermes GitHub</a>
+    <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">MCP GitHub</a>
+    <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI</a>
+    <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub Plugin</a>
+    <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank" rel="noopener">ClawHub Skill</a>
   </div>
 </footer>
 
 <script>
-// Copy to clipboard
-function copyText(text, btn) {
-  navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-  });
-}
-
-// Tab switching
-function activateTab(tabId) {
-  var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
-  var targetPanel = document.getElementById('tab-' + tabId);
-  if (!targetBtn || !targetPanel) return;
-  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-  targetBtn.classList.add('active');
-  targetPanel.classList.add('active');
-}
-
-document.querySelectorAll('.tab-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
-});
-
-document.querySelectorAll('[data-open-tab]').forEach(function(link) {
-  link.addEventListener('click', function() { activateTab(link.dataset.openTab); });
-});
-
-if (window.location.hash === '#quickstart-hermes' || window.location.hash === '#tab-hermes') {
-  activateTab('hermes');
-}
-if (window.location.hash === '#quickstart-plugin' || window.location.hash === '#tab-plugin') {
-  activateTab('plugin');
-}
-
-// Copy tab content
-var tabContents = {
-  openclaw: 'openclaw skills install web-search-plus\n\nSERPER_API_KEY=your-serper-key\nBRAVE_API_KEY=your-brave-key\nTAVILY_API_KEY=your-tavily-key\nLINKUP_API_KEY=your-linkup-key\nFIRECRAWL_API_KEY=your-firecrawl-key\nEXA_API_KEY=your-exa-key',
-  plugin: 'openclaw plugins install clawhub:web-search-plus-plugin-v2\n\nSERPER_API_KEY=your-serper-key\nBRAVE_API_KEY=your-brave-key\nTAVILY_API_KEY=your-tavily-key\nLINKUP_API_KEY=your-linkup-key\nFIRECRAWL_API_KEY=your-firecrawl-key\nEXA_API_KEY=your-exa-key',
-  hermes: 'hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable\nhermes config env-path\n$EDITOR "$(hermes config env-path)"\n# Add BRAVE_API_KEY / TAVILY_API_KEY / EXA_API_KEY / LINKUP_API_KEY\n# Restart Hermes, then test: web_search_plus(..., quality_report=true)',
-  claude: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["web-search-plus-mcp"],\n      "env": {\n        "SERPER_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key",\n        "QUERIT_API_KEY": "your-key",\n        "PERPLEXITY_API_KEY": "your-key"\n      }\n    }\n  }\n}',
-  cursor: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["web-search-plus-mcp"],\n      "env": {\n        "SERPER_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key"\n      }\n    }\n  }\n}',
-  nanobot: '{\n  "tools": {\n    "mcpServers": {\n      "web-search-plus": {\n        "command": "uvx",\n        "args": ["web-search-plus-mcp"],\n        "env": {\n          "SERPER_API_KEY": "your-key",\n          "TAVILY_API_KEY": "your-key"\n        }\n      }\n    }\n  }\n}'
+const tabContents = {
+  plugin: 'openclaw plugins install clawhub:web-search-plus-plugin-v2\n\nplugins.entries.web-search-plus-plugin-v2.config.braveApiKey=your-brave-key\nplugins.entries.web-search-plus-plugin-v2.config.tavilyApiKey=your-tavily-key\nplugins.entries.web-search-plus-plugin-v2.config.exaApiKey=your-exa-key\nplugins.entries.web-search-plus-plugin-v2.config.linkupApiKey=your-linkup-key',
+  hermes: 'hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable\npython ~/.hermes/plugins/web-search-plus/setup.py setup\n\nweb_search_plus(query="latest AI model releases", quality_report=true)\nweb_extract_plus(urls=["https://example.com/docs"])',
+  claude: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],\n      "env": {\n        "BRAVE_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key",\n        "LINKUP_API_KEY": "your-key"\n      }\n    }\n  }\n}',
+  cursor: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],\n      "env": {\n        "BRAVE_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key"\n      }\n    }\n  }\n}',
+  nanobot: '{\n  "tools": {\n    "mcpServers": {\n      "web-search-plus": {\n        "command": "uvx",\n        "args": ["--from", "web-search-plus-mcp==0.8.0", "web-search-plus-mcp"],\n        "env": {\n          "BRAVE_API_KEY": "your-key",\n          "TAVILY_API_KEY": "your-key"\n        }\n      }\n    }\n  }\n}'
 };
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => flash(btn));
+}
 function copyTab(id, btn) {
-  navigator.clipboard.writeText(tabContents[id]).then(function() {
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-  });
+  navigator.clipboard.writeText(tabContents[id]).then(() => flash(btn));
 }
-
-// Theme toggle
-function toggleTheme() {
-  var html = document.documentElement;
-  var isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.querySelector('.theme-icon').textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+function flash(btn) {
+  const old = btn.textContent;
+  btn.textContent = 'Copied';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1500);
 }
-// On load, apply saved theme
-(function() {
-  var saved = localStorage.getItem('theme') || 'light';
-  if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    var icon = document.querySelector('.theme-icon');
-    if (icon) icon.textContent = '☀️';
-  }
-})();
-
-// Scroll fade-in
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+function activateTab(tabId) {
+  document.querySelectorAll('.tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+  document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === 'tab-' + tabId));
+}
+document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
+document.querySelectorAll('[data-open-tab]').forEach(link => link.addEventListener('click', () => activateTab(link.dataset.openTab)));
+const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: .12 });
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
