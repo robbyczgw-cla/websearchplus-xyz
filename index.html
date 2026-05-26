@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with intelligent routing for Hermes Agent, OpenClaw and MCP clients.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with intelligent routing for Hermes Agent, OpenClaw and MCP clients.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
 :root {
@@ -94,6 +94,8 @@ h1 { margin: 0; max-width: 780px; font-family: var(--serif); font-size: clamp(3.
 .hero-proof { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; color: var(--muted); }
 .pill { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; background: rgba(255,255,255,.035); font-family: var(--mono); font-size: .76rem; white-space: nowrap; }
 .pill strong { color: var(--text); }
+.pill-author { color: var(--text); border-color: rgba(245,165,36,.36); background: rgba(245,165,36,.09); }
+.pill-author span { color: var(--accent); }
 .device-card { position: relative; border: 1px solid var(--line); border-radius: 34px; padding: 18px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); box-shadow: 0 34px 120px rgba(0,0,0,.38); overflow: hidden; }
 .device-card::before { content: ""; position: absolute; inset: -1px; background: radial-gradient(circle at 80% 0%, rgba(245,165,36,.22), transparent 18rem); pointer-events: none; }
 .panel { position: relative; border: 1px solid var(--line); border-radius: 24px; background: rgba(7,9,14,.78); overflow: hidden; }
@@ -149,6 +151,9 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 .update-meta span { color: var(--dim); }
 .update p { margin: 0; color: var(--muted); }
 .footer { border-top: 1px solid var(--line); padding: 36px 0; }
+.footer-credit { margin: 0 0 18px; text-align: center; color: var(--muted); font-family: var(--mono); font-size: .82rem; }
+.footer-credit a { color: var(--accent); font-weight: 900; }
+.footer-credit a:hover { color: var(--accent-2); }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
 .footer-links a { color: var(--dim); font-family: var(--mono); font-size: .82rem; }
 .footer-links a:hover { color: var(--accent); }
@@ -209,12 +214,13 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
         <a class="btn btn-primary btn-primary-alt" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
-        <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★ 182</a>
+        <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★ 194</a>
       </div>
       <div class="hero-proof" aria-label="Project highlights">
         <span class="pill"><strong>13</strong> search providers</span>
         <span class="pill"><strong>6</strong> extraction providers</span>
         <span class="pill">routing · fallback · quality reports</span>
+        <a class="pill pill-author" href="https://github.com/robbyczgw-cla" target="_blank" rel="noopener">Built by <strong>Robby Czesany</strong> <span>@robbyczgw-cla</span></a>
       </div>
     </div>
     <div class="device-card" aria-label="Routing preview">
@@ -394,12 +400,15 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
 </main>
 
 <footer class="footer">
-  <div class="container footer-links">
+  <div class="container">
+  <p class="footer-credit">Built and maintained by <a href="https://github.com/robbyczgw-cla" target="_blank" rel="noopener">Robby Czesany</a> · <a href="https://github.com/robbyczgw-cla" target="_blank" rel="noopener">@robbyczgw-cla</a></p>
+  <div class="footer-links">
     <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">Hermes GitHub</a>
     <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">MCP GitHub</a>
     <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI</a>
     <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub Plugin</a>
     <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank" rel="noopener">ClawHub Skill</a>
+  </div>
   </div>
 </footer>
 
