@@ -293,9 +293,9 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
           <div class="links"><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub →</a><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.3.0" target="_blank" rel="noopener">Release →</a></div>
         </article>
         <article class="product fade">
-          <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">GitHub v0.9.0</span></div>
-          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Same routing engine, stable search and extraction tools, now with guarded Parallel provider support on main.</p>
-          <div class="install"><code>uvx --from git+https://github.com/robbyczgw-cla/web-search-plus-mcp web-search-plus-mcp</code><button class="copy" onclick="copyText('uvx --from git+https://github.com/robbyczgw-cla/web-search-plus-mcp web-search-plus-mcp', this)">Copy</button></div>
+          <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">PyPI v0.10.0</span></div>
+          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Synced with Web Search Plus v2.3: Routing v2.3, 13 search providers, 6 extraction providers and registry-backed diagnostics.</p>
+          <div class="install"><code>uvx web-search-plus-mcp</code><button class="copy" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button></div>
           <div class="links"><a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
         <article class="product fade">
@@ -340,13 +340,11 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
   "mcpServers": {
     "web-search-plus": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],
+      "args": ["web-search-plus-mcp"],
       "env": {
-        "BRAVE_API_KEY": "your-key",
-        "TAVILY_API_KEY": "your-key",
-        "EXA_API_KEY": "your-key",
-        "LINKUP_API_KEY": "your-key",
-        "PARALLEL_API_KEY": "your-key"
+        "YOU_API_KEY": "your-key",
+        "SERPER_API_KEY": "your-key",
+        "LINKUP_API_KEY": "your-key"
       }
     }
   }
@@ -355,12 +353,11 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
   "mcpServers": {
     "web-search-plus": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],
+      "args": ["web-search-plus-mcp"],
       "env": {
-        "BRAVE_API_KEY": "your-key",
-        "TAVILY_API_KEY": "your-key",
-        "EXA_API_KEY": "your-key",
-        "PARALLEL_API_KEY": "your-key"
+        "YOU_API_KEY": "your-key",
+        "SERPER_API_KEY": "your-key",
+        "LINKUP_API_KEY": "your-key"
       }
     }
   }
@@ -370,11 +367,11 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
     "mcpServers": {
       "web-search-plus": {
         "command": "uvx",
-        "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],
+        "args": ["web-search-plus-mcp"],
         "env": {
-          "BRAVE_API_KEY": "your-key",
-          "TAVILY_API_KEY": "your-key",
-          "PARALLEL_API_KEY": "your-key"
+          "YOU_API_KEY": "your-key",
+          "SERPER_API_KEY": "your-key",
+          "LINKUP_API_KEY": "your-key"
         }
       }
     }
@@ -391,7 +388,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
       <p class="section-lead">The page tracks the current mainline surface: search plus extraction, explicit-only guarded providers, no stale hero metrics.</p>
       <div class="updates fade">
         <article class="update"><div class="update-meta"><b>Hermes ProviderSpec registry</b><span>May 29, 2026</span></div><p>Hermes v2.3.0 centralizes provider metadata across setup, config, routing, extraction, doctor diagnostics and CLI choices, reducing drift across the 13-search / 6-extract provider mesh.</p></article>
-        <article class="update"><div class="update-meta"><b>MCP v0.8.0</b><span>May 16, 2026</span></div><p>Latest PyPI release before the Parallel mainline merge: stable <code>web_search</code> and <code>web_extract</code>, Routing v2, 12 search providers and 5 extraction providers.</p></article>
+        <article class="update"><div class="update-meta"><b>MCP v0.10.0</b><span>May 29, 2026</span></div><p>Standalone MCP package synced with Web Search Plus v2.3: shared ProviderSpec registry, Routing v2.3, doctor checks, research mode, 13 search providers and 6 extraction providers.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.3.0</b><span>May 29, 2026</span></div><p>Focused tool surface for <code>web_search_plus</code> and <code>web_extract_plus</code>, plus canonical authority signals, offline golden quality checks, research mode, guarded Parallel support and fresh release links.</p></article>
         <article class="update"><div class="update-meta"><b>OpenClaw Plugin</b><span>latest path</span></div><p>Native OpenClaw install with routing preferences, provider fallback and extraction support.</p></article>
       </div>
@@ -416,9 +413,9 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
 const tabContents = {
   plugin: 'openclaw plugins install clawhub:web-search-plus-plugin-v2\n\nplugins.entries.web-search-plus-plugin-v2.config.braveApiKey=your-brave-key\nplugins.entries.web-search-plus-plugin-v2.config.tavilyApiKey=your-tavily-key\nplugins.entries.web-search-plus-plugin-v2.config.exaApiKey=your-exa-key\nplugins.entries.web-search-plus-plugin-v2.config.linkupApiKey=your-linkup-key',
   hermes: 'hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable\npython ~/.hermes/plugins/web-search-plus/setup.py setup\n\nweb_search_plus(query="latest AI model releases", quality_report=true)\nweb_extract_plus(urls=["https://example.com/docs"])',
-  claude: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],\n      "env": {\n        "BRAVE_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key",\n        "LINKUP_API_KEY": "your-key",\n        "PARALLEL_API_KEY": "your-key"\n      }\n    }\n  }\n}',
-  cursor: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],\n      "env": {\n        "BRAVE_API_KEY": "your-key",\n        "TAVILY_API_KEY": "your-key",\n        "EXA_API_KEY": "your-key",\n        "PARALLEL_API_KEY": "your-key"\n      }\n    }\n  }\n}',
-  nanobot: '{\n  "tools": {\n    "mcpServers": {\n      "web-search-plus": {\n        "command": "uvx",\n        "args": ["--from", "git+https://github.com/robbyczgw-cla/web-search-plus-mcp", "web-search-plus-mcp"],\n        "env": {\n          "BRAVE_API_KEY": "your-key",\n          "TAVILY_API_KEY": "your-key",\n          "PARALLEL_API_KEY": "your-key"\n        }\n      }\n    }\n  }\n}'
+  claude: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["web-search-plus-mcp"],\n      "env": {\n        "YOU_API_KEY": "your-key",\n        "SERPER_API_KEY": "your-key",\n        "LINKUP_API_KEY": "your-key"\n      }\n    }\n  }\n}',
+  cursor: '{\n  "mcpServers": {\n    "web-search-plus": {\n      "command": "uvx",\n      "args": ["web-search-plus-mcp"],\n      "env": {\n        "YOU_API_KEY": "your-key",\n        "SERPER_API_KEY": "your-key",\n        "LINKUP_API_KEY": "your-key"\n      }\n    }\n  }\n}',
+  nanobot: '{\n  "tools": {\n    "mcpServers": {\n      "web-search-plus": {\n        "command": "uvx",\n        "args": ["web-search-plus-mcp"],\n        "env": {\n          "YOU_API_KEY": "your-key",\n          "SERPER_API_KEY": "your-key",\n          "LINKUP_API_KEY": "your-key"\n        }\n      }\n    }\n  }\n}'
 };
 function copyText(text, btn) {
   navigator.clipboard.writeText(text).then(() => flash(btn));
