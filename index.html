@@ -23,6 +23,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with intelligent routing for Hermes Agent, OpenClaw and MCP clients.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 13 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG even works self-hosted with no commercial key at all."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 13 providers, and web_extract_plus pulls clean content from URLs across 6 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and the self-hosted SearXNG path costs nothing."}}]}
+</script>
 <style>
 :root {
   color-scheme: dark;
@@ -45,7 +48,7 @@
   --serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--bg); }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; background: var(--bg); }
 body {
   margin: 0;
   min-width: 320px;
@@ -159,6 +162,47 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 .footer-links a:hover { color: var(--accent); }
 .fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
 .fade.visible { opacity: 1; transform: translateY(0); }
+.card, .provider, .product, .step { transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+.card:hover, .step:hover { transform: translateY(-2px); border-color: var(--line-strong); background: rgba(255,255,255,.05); }
+.provider:hover { border-color: rgba(245,165,36,.4); color: var(--text); }
+.live-tag { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--green); }
+.live-tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+.route-row { transition: border-color .4s ease, background .4s ease, box-shadow .4s ease; }
+.route-row.live { border-color: rgba(245,165,36,.55); background: rgba(245,165,36,.07); box-shadow: 0 0 0 1px rgba(245,165,36,.16), 0 10px 36px rgba(245,165,36,.1); }
+.route-row.live .route-badge { animation: badgepop .45s ease; }
+@keyframes badgepop { 0% { transform: scale(.82); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.statband { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.02); }
+.statband-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 28px 16px; text-align: center; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; }
+.stat b { display: block; font-family: var(--serif); font-size: clamp(1.9rem, 4.5vw, 2.9rem); font-weight: 900; letter-spacing: -.04em; line-height: 1; color: var(--text); }
+.stat b em { font-style: italic; color: var(--accent); }
+.stat span { display: block; margin-top: 9px; color: var(--dim); font-family: var(--mono); font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; }
+.compare { margin-top: 38px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.02); }
+.compare-head, .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
+.compare-head span { padding: 15px 20px; font-family: var(--mono); font-size: .74rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--line); }
+.compare-head span:last-child { color: var(--accent); border-left: 1px solid var(--line); background: rgba(245,165,36,.05); }
+.compare-row > div { display: flex; align-items: baseline; gap: 10px; padding: 15px 20px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .94rem; }
+.compare-row > div:last-child { border-left: 1px solid var(--line); color: var(--text); background: rgba(245,165,36,.04); }
+.compare-row:last-child > div { border-bottom: 0; }
+.mark { flex: none; font-family: var(--mono); font-weight: 900; font-size: .82rem; }
+.mark.x { color: var(--danger); }
+.mark.v { color: var(--green); }
+.routing-grid { margin-top: 38px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 22px; align-items: start; }
+.steps { display: grid; gap: 12px; }
+.step { display: grid; grid-template-columns: auto 1fr; gap: 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 17px 18px; background: rgba(255,255,255,.03); }
+.step-num { color: var(--accent); font-family: var(--mono); font-size: .76rem; font-weight: 900; padding-top: 3px; }
+.step h3 { margin: 0 0 4px; font-size: 1rem; }
+.step p { margin: 0; color: var(--muted); font-size: .9rem; }
+.faq { margin-top: 34px; max-width: 840px; display: grid; gap: 10px; }
+.faq details { border: 1px solid var(--line); border-radius: var(--radius-sm); background: rgba(255,255,255,.03); overflow: hidden; }
+.faq details[open] { border-color: rgba(245,165,36,.36); }
+.faq summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 17px 19px; cursor: pointer; font-weight: 750; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; color: var(--accent); font-family: var(--mono); font-size: 1.05rem; font-weight: 900; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 0; padding: 0 19px 17px; color: var(--muted); font-size: .94rem; }
 @media (max-width: 860px) {
   .container { width: min(100% - 32px, 1120px); }
   .nav-inner { height: 62px; }
@@ -167,6 +211,10 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
   .device-card { order: -1; max-width: 520px; margin: 0 auto; }
   .cards, .products { grid-template-columns: 1fr; }
   .section { padding: 56px 0; }
+  .statband-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .routing-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .container { width: min(100% - 28px, 1120px); }
@@ -188,6 +236,15 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
   .copy { min-height: 44px; width: 100%; }
   .tab { min-height: 50px; padding: 12px 14px; }
   pre { padding: 58px 16px 20px; font-size: .78rem; }
+  .compare-head { display: none; }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-row > div:last-child { border-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade { opacity: 1; transform: none; transition: none; }
+  .card, .provider, .product, .step, .route-row, .btn { transition: none; }
+  .live-tag i, .route-row.live .route-badge { animation: none; }
 }
 </style>
 </head>
@@ -201,6 +258,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <a href="#providers">Providers</a>
       <a href="#quickstart">Quickstart</a>
       <a href="#updates">Updates</a>
+      <a href="#faq">FAQ</a>
     </div>
   </div>
 </nav>
@@ -214,7 +272,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
         <a class="btn btn-primary btn-primary-alt" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
-        <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★ 194</a>
+        <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★<span id="star-count"></span></a>
       </div>
       <div class="hero-proof" aria-label="Project highlights">
         <span class="pill"><strong>13</strong> search providers</span>
@@ -225,7 +283,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     </div>
     <div class="device-card" aria-label="Routing preview">
       <div class="panel">
-        <div class="panel-head"><span class="dot"></span>routing-preview.json</div>
+        <div class="panel-head"><span class="dot"></span>routing-preview.json<span class="live-tag"><i></i>live</span></div>
         <div class="routing">
           <div class="route-row"><div><div class="route-title">latest model pricing</div><div class="route-desc">fresh broad query</div></div><span class="route-badge">Brave</span></div>
           <div class="route-row"><div><div class="route-title">compare RAG papers</div><div class="route-desc">research query</div></div><span class="route-badge">Tavily</span></div>
@@ -237,6 +295,15 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
   </div>
 </header>
 
+<section class="statband" aria-label="Key numbers">
+  <div class="container statband-inner">
+    <div class="stat"><b>13</b><span>search providers</span></div>
+    <div class="stat"><b>6</b><span>extraction providers</span></div>
+    <div class="stat"><b>4</b><span>install paths</span></div>
+    <div class="stat"><b><em>1</em></b><span>interface to learn</span></div>
+  </div>
+</section>
+
 <main>
   <section id="how" class="section">
     <div class="container">
@@ -247,6 +314,13 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         <article class="card fade"><span class="num">01</span><h3>Intent routing</h3><p>Research, shopping, news, local, semantic discovery and extraction each get routed to providers that are actually good at that job.</p></article>
         <article class="card fade"><span class="num">02</span><h3>Failure-tolerant</h3><p>Missing key, provider hiccup or empty result? It falls through instead of making the agent faceplant like a demo on conference Wi‑Fi.</p></article>
         <article class="card fade"><span class="num">03</span><h3>Debuggable</h3><p>Quality reports explain provider choice, errors, result counts, timing and extraction path when you need receipts.</p></article>
+      </div>
+      <div class="compare fade">
+        <div class="compare-head"><span>One hardcoded backend</span><span>Web Search Plus</span></div>
+        <div class="compare-row"><div><span class="mark x">✕</span>Provider outage = every agent run breaks</div><div><span class="mark v">✓</span>Automatic fallback chain keeps answers flowing</div></div>
+        <div class="compare-row"><div><span class="mark x">✕</span>Same engine forced on news, research, shopping and code</div><div><span class="mark v">✓</span>Each intent routes to a provider that is actually good at it</div></div>
+        <div class="compare-row"><div><span class="mark x">✕</span>New client or runtime = new provider glue code</div><div><span class="mark v">✓</span>One engine across Hermes, OpenClaw and any MCP client</div></div>
+        <div class="compare-row"><div><span class="mark x">✕</span>Empty results fail silently mid-task</div><div><span class="mark v">✓</span>Quality reports show who answered, why and how fast</div></div>
       </div>
     </div>
   </section>
@@ -270,6 +344,36 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         <span class="provider"><i style="background:#14b8a6"></i><b>SerpBase</b> Google SERP</span>
         <span class="provider"><i style="background:#6366f1"></i><b>Parallel</b> explicit search + extract</span>
         <span class="provider"><i style="background:#22c55e"></i><b>SearXNG</b> self-hosted</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="routing" class="section">
+    <div class="container">
+      <p class="section-kicker">Under the hood</p>
+      <h2>Every query gets a plan.</h2>
+      <p class="section-lead">No black box. Each request is classified, routed, retried and — if you ask — explained back to you.</p>
+      <div class="routing-grid">
+        <div class="steps fade">
+          <div class="step"><span class="step-num">01</span><div><h3>Classify intent</h3><p>The query is read first: research, news, shopping, local, semantic discovery or URL extraction.</p></div></div>
+          <div class="step"><span class="step-num">02</span><div><h3>Pick the provider</h3><p>The best provider for that intent is chosen from the keys you actually have configured — one key works, more keys route smarter.</p></div></div>
+          <div class="step"><span class="step-num">03</span><div><h3>Fall through on failure</h3><p>Missing key, provider error or empty result set? The chain moves to the next candidate instead of surfacing a dead end to the agent.</p></div></div>
+          <div class="step"><span class="step-num">04</span><div><h3>Return the receipts</h3><p>Pass <code>quality_report=true</code> and the response explains which provider answered, why it was picked, timings and any fallbacks taken.</p></div></div>
+        </div>
+        <div class="panel fade">
+          <div class="panel-head"><span class="dot"></span>quality-report.json</div>
+          <pre>{
+  <span class="code-comment">// example quality report</span>
+  "query_intent": "research",
+  "provider_used": "tavily",
+  "reason": "research intent + key available",
+  "fallback_chain": ["brave", "serper"],
+  "fallbacks_taken": 0,
+  "results_returned": 8,
+  "elapsed_ms": 742,
+  "extraction_path": null
+}</pre>
+        </div>
       </div>
     </div>
   </section>
@@ -394,6 +498,35 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
       </div>
     </div>
   </section>
+
+  <section id="faq" class="section alt">
+    <div class="container">
+      <p class="section-kicker">FAQ</p>
+      <h2>Quick answers.</h2>
+      <div class="faq fade">
+        <details>
+          <summary>Do I need API keys for all 13 providers?</summary>
+          <p>No. One provider key is enough to get started — routing adapts to whichever keys are present and simply gets smarter as you add more. SearXNG even works self-hosted with no commercial key at all.</p>
+        </details>
+        <details>
+          <summary>Which clients does it work with?</summary>
+          <p>Hermes Agent and OpenClaw natively as flagship plugins, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone <code>web-search-plus-mcp</code> server on PyPI.</p>
+        </details>
+        <details>
+          <summary>What happens when a provider fails?</summary>
+          <p>The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback that was taken, so nothing fails silently.</p>
+        </details>
+        <details>
+          <summary>Does it extract page content too, or just search?</summary>
+          <p>Both. <code>web_search_plus</code> handles live search across 13 providers, and <code>web_extract_plus</code> pulls clean content from URLs across 6 extraction providers with the same fallback behavior.</p>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and the self-hosted SearXNG path costs nothing.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -437,6 +570,20 @@ document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', (
 document.querySelectorAll('[data-open-tab]').forEach(link => link.addEventListener('click', () => activateTab(link.dataset.openTab)));
 const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: .12 });
 document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+fetch('https://api.github.com/repos/robbyczgw-cla/hermes-web-search-plus')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => { if (d && typeof d.stargazers_count === 'number') document.getElementById('star-count').textContent = ' ' + d.stargazers_count; })
+  .catch(() => {});
+const routeRows = document.querySelectorAll('.routing .route-row');
+if (routeRows.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let liveIndex = 0;
+  routeRows[liveIndex].classList.add('live');
+  setInterval(() => {
+    routeRows[liveIndex].classList.remove('live');
+    liveIndex = (liveIndex + 1) % routeRows.length;
+    routeRows[liveIndex].classList.add('live');
+  }, 2400);
+}
 </script>
 </body>
 </html>
