@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Web Search Plus — One search. Every source.</title>
-<meta name="description" content="Web Search Plus routes research-grade web search and extraction across 13 search providers and 6 extraction providers for Hermes Agent, OpenClaw and MCP clients — now with canonical-source reranking, SSRF guards and SkillSpector-clean releases.">
+<meta name="description" content="Web Search Plus routes research-grade web search and extraction across 13 search providers and 6 extraction providers for Hermes Agent, OpenClaw, NanoClaw and MCP clients — now with canonical-source reranking, SSRF guards and SkillSpector-clean releases.">
 <link rel="canonical" href="https://websearchplus.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web Search Plus">
 <meta property="og:title" content="Web Search Plus — One search. Every source.">
-<meta property="og:description" content="Multi-provider search and extraction for Hermes Agent, OpenClaw and any MCP client. Research mode, canonical-source reranking, SSRF guards, quality reports and fast setup.">
+<meta property="og:description" content="Multi-provider search and extraction for Hermes Agent, OpenClaw, NanoClaw and any MCP client. Research mode, canonical-source reranking, SSRF guards, quality reports and fast setup.">
 <meta property="og:url" content="https://websearchplus.xyz/">
 <meta property="og:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <meta property="og:image:width" content="1200">
@@ -21,10 +21,10 @@
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw and MCP clients.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw, NanoClaw and MCP clients.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://github.com/robbyczgw-cla/hermes-web-search-plus","https://github.com/robbyczgw-cla/web-search-plus-mcp","https://github.com/robbyczgw-cla/web-search-plus-plugin","https://github.com/robbyczgw-cla/web-search-plus","https://github.com/robbyczgw-cla/nanoclaw-web-search-plus"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 13 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG even works self-hosted with no commercial key at all."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 13 providers, and web_extract_plus pulls clean content from URLs across 6 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and the self-hosted SearXNG path costs nothing."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 13 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG even works self-hosted with no commercial key at all."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, NanoClaw through a dedicated utility-skill front-end, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 13 providers, and web_extract_plus pulls clean content from URLs across 6 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and the self-hosted SearXNG path costs nothing."}}]}
 </script>
 <style>
 :root {
@@ -268,7 +268,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div>
       <p class="eyebrow">Agentic web search</p>
       <h1>One search.<br><span class="hero-mark">Every source.</span></h1>
-      <p class="hero-sub">Web Search Plus routes live web search, research mode and URL extraction across the right providers — now security-hardened for Hermes Agent, OpenClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
+      <p class="hero-sub">Web Search Plus routes live web search, research mode and URL extraction across the right providers — now security-hardened for Hermes Agent, OpenClaw, NanoClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
         <a class="btn btn-primary btn-primary-alt" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
@@ -388,7 +388,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div class="container">
       <p class="section-kicker">Install paths</p>
       <h2>Pick your runtime.</h2>
-      <p class="section-lead">Hermes Agent and OpenClaw Plugin are both primary flagship paths. The MCP server keeps every other client on the same routing engine.</p>
+      <p class="section-lead">Hermes Agent and OpenClaw Plugin are both primary flagship paths. NanoClaw gets its own utility-skill front-end, and the MCP server keeps every other client on the same routing engine.</p>
       <div class="products">
         <article class="product featured fade">
           <div class="product-head"><h3 class="product-title">OpenClaw Plugin</h3><span class="badge">primary · v3.1.0</span></div>
@@ -401,6 +401,12 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
           <p>Hermes plugin exposing <code>web_search_plus</code> and <code>web_extract_plus</code>, now with in-process tool calls, parallel research mode and Hermes profile <code>.env</code> loading.</p>
           <div class="install"><code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code><button class="copy" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button></div>
           <div class="links"><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub →</a><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.4.0" target="_blank" rel="noopener">Release →</a></div>
+        </article>
+        <article class="product fade">
+          <div class="product-head"><h3 class="product-title">NanoClaw Utility Skill</h3><span class="badge">GitHub</span></div>
+          <p>NanoClaw front-end for Web Search Plus: a self-contained utility skill that installs the <code>wsp</code> CLI into agent containers, no MCP required, no metered WebSearch pool.</p>
+          <div class="install"><code>/add-web-search-plus</code><button type="button" class="copy" onclick="copyText('/add-web-search-plus', this)">Copy</button></div>
+          <div class="links"><a href="https://github.com/robbyczgw-cla/nanoclaw-web-search-plus" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
         <article class="product fade">
           <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">PyPI v0.11.0</span></div>
@@ -501,6 +507,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
         <article class="update"><div class="update-meta"><b>OpenClaw Plugin v3.1.0</b><span>June 10, 2026</span></div><p>Native plugin release adds research mode, authority reranking, quality signals and retry jitter; ClawHub artifact verified and install-smoked through OpenClaw.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.4.0</b><span>June 8, 2026</span></div><p>In-process Hermes tool calls remove subprocess startup overhead, research mode fans providers out concurrently, and CLI/config helpers now load keys from the active Hermes profile <code>.env</code>.</p></article>
         <article class="update"><div class="update-meta"><b>MCP v0.11.0</b><span>current PyPI</span></div><p>Standalone MCP package keeps Claude Desktop, Cursor, NanoBot and other clients on the same shared routing engine and provider registry.</p></article>
+        <article class="update"><div class="update-meta"><b>NanoClaw utility skill</b><span>GitHub</span></div><p>Dedicated NanoClaw front-end packages the shared engine as a self-contained <code>wsp</code> CLI skill for agent containers — search and extract, no MCP bridge required.</p></article>
       </div>
     </div>
   </section>
@@ -516,7 +523,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
         </details>
         <details>
           <summary>Which clients does it work with?</summary>
-          <p>Hermes Agent and OpenClaw natively as flagship plugins, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone <code>web-search-plus-mcp</code> server on PyPI.</p>
+          <p>Hermes Agent and OpenClaw natively as flagship plugins, NanoClaw through a dedicated utility-skill front-end, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone <code>web-search-plus-mcp</code> server on PyPI.</p>
         </details>
         <details>
           <summary>What happens when a provider fails?</summary>
@@ -541,6 +548,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
   <div class="footer-links">
     <a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">Hermes GitHub</a>
     <a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">MCP GitHub</a>
+    <a href="https://github.com/robbyczgw-cla/nanoclaw-web-search-plus" target="_blank" rel="noopener">NanoClaw GitHub</a>
     <a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI</a>
     <a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub Plugin</a>
     <a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank" rel="noopener">ClawHub Skill</a>
