@@ -410,8 +410,8 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
           <div class="links"><a href="https://github.com/robbyczgw-cla/nanoclaw-web-search-plus" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
         <article class="product fade">
-          <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">v0.13.0 PR ready</span></div>
-          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. The v0.13.0 sync PR carries the v2.6.1 engine family: 14 search providers, 7 extraction providers, Keenable, GroktoCrawl/local Firecrawl-compatible backend docs, registry-backed diagnostics and config-driven disabled-provider gating for extract.</p>
+          <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">PyPI v0.13.0</span></div>
+          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Current PyPI line carries the v2.6.1 engine family: 14 search providers, 7 extraction providers, Keenable, GroktoCrawl/local Firecrawl-compatible backend docs, registry-backed diagnostics and config-driven disabled-provider gating for extract.</p>
           <div class="install"><code>uvx web-search-plus-mcp</code><button class="copy" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button></div>
           <div class="links"><a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
@@ -502,12 +502,12 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
     <div class="container">
       <p class="section-kicker">Current state</p>
       <h2>Fresh, not fossilized.</h2>
-      <p class="section-lead">The page tracks the current mainline surface: Hermes v2.6.1, OpenClaw Plugin v3.1.0, OpenClaw Skill v3.2.0 and MCP v0.13.0 PR-ready sync — no fossilized release copy.</p>
+      <p class="section-lead">The page tracks the current mainline surface: Hermes v2.6.1, OpenClaw Plugin v3.1.0, OpenClaw Skill v3.2.0 and MCP v0.13.0 — no fossilized release copy.</p>
       <div class="updates fade">
         <article class="update"><div class="update-meta"><b>Hermes v2.6.1</b><span>June 26, 2026</span></div><p>GroktoCrawl can be used as a local Firecrawl-compatible backend through the existing <code>firecrawl.api_url</code> and <code>firecrawl.scrape_url</code> overrides; no separate provider or default backend required.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.6.0</b><span>June 26, 2026</span></div><p>Keenable joins the Hermes provider lineup for search and extraction. Use <code>KEENABLE_API_KEY</code> for authenticated calls; the keyless public endpoint is opt-in and disabled by default.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.5.1</b><span>June 16, 2026</span></div><p>Config-driven provider gating now covers both search and extraction. Firecrawl and any other provider can be disabled centrally in <code>config.json</code> without touching release code.</p></article>
-        <article class="update"><div class="update-meta"><b>MCP v0.13.0</b><span>PR ready</span></div><p>Standalone MCP package syncs the v2.6.1 provider line: Keenable search/extract, opt-in keyless public mode, GroktoCrawl/local Firecrawl-compatible backend docs and 14/7 provider schemas for Claude Desktop, Cursor, NanoBot and other clients.</p></article>
+        <article class="update"><div class="update-meta"><b>MCP v0.13.0</b><span>current PyPI</span></div><p>Standalone MCP package syncs the v2.6.1 provider line: Keenable search/extract, opt-in keyless public mode, GroktoCrawl/local Firecrawl-compatible backend docs and 14/7 provider schemas for Claude Desktop, Cursor, NanoBot and other clients.</p></article>
         <article class="update"><div class="update-meta"><b>OpenClaw Skill v3.2.0</b><span>June 10, 2026</span></div><p>Feature sync with the Hermes v2 line plus SkillSpector fixes: narrow triggers, privacy disclosures, hardened local cache permissions, SSRF URL guard, permission metadata and credential redaction.</p></article>
         <article class="update"><div class="update-meta"><b>OpenClaw Plugin v3.1.0</b><span>June 10, 2026</span></div><p>Native plugin release adds research mode, authority reranking, quality signals and retry jitter; ClawHub artifact verified and install-smoked through OpenClaw.</p></article>
         <article class="update"><div class="update-meta"><b>NanoClaw utility skill</b><span>GitHub</span></div><p>Dedicated NanoClaw front-end packages the shared engine as a self-contained <code>wsp</code> CLI skill for agent containers — search and extract, no MCP bridge required.</p></article>
