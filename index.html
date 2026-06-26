@@ -138,6 +138,7 @@ h2 { margin: 0; font-size: clamp(2rem, 6.5vw, 4.2rem); line-height: .98; letter-
 .product-title { margin: 0; font-size: 1.22rem; }
 .badge { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; color: var(--accent); background: rgba(245,165,36,.1); font-family: var(--mono); font-size: .72rem; font-weight: 900; }
 .product p { margin: 0; color: var(--muted); }
+.product-status { display: inline-flex; width: fit-content; border: 1px solid rgba(104,225,253,.24); border-radius: 999px; padding: 6px 10px; color: var(--accent-2); background: rgba(104,225,253,.07); font-family: var(--mono); font-size: .74rem; font-weight: 850; }
 .install { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.24); padding: 12px; }
 .install code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent-2); font-family: var(--mono); font-size: .82rem; }
 .copy { min-height: 36px; border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.05); border-radius: 999px; padding: 6px 11px; cursor: pointer; font-family: var(--mono); font-size: .75rem; font-weight: 850; }
@@ -409,6 +410,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         <article class="product featured fade">
           <div class="product-head"><h3 class="product-title">OpenClaw Plugin</h3><span class="badge">primary · v3.1.0</span></div>
           <p>Native OpenClaw tools: <code>web_search_plus</code>, <code>web_extract_plus</code> and <code>web_routing_config_plus</code>. v3.1.0 adds research mode, authority reranking and retry jitter for OpenClaw workflows.</p>
+          <p class="product-status">stable · engine v2.4 line · active dev → Hermes + MCP</p>
           <div class="install"><code>openclaw plugins install clawhub:web-search-plus-plugin-v2</code><button class="copy" onclick="copyText('openclaw plugins install clawhub:web-search-plus-plugin-v2', this)">Copy</button></div>
           <div class="links"><a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
@@ -433,6 +435,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         <article class="product fade">
           <div class="product-head"><h3 class="product-title">OpenClaw Skill</h3><span class="badge">v3.2.0</span></div>
           <p>Portable skill workflow with research mode, canonical-source reranking, SSRF-protected URL extraction, hardened caching disclosures and narrow SkillSpector-clean triggers.</p>
+          <p class="product-status">stable · engine v2.4 line · active dev → Hermes + MCP</p>
           <div class="install"><code>openclaw skills install web-search-plus</code><button class="copy" onclick="copyText('openclaw skills install web-search-plus', this)">Copy</button></div>
           <div class="links"><a href="https://www.clawhub.ai/robbyczgw-cla/web-search-plus" target="_blank" rel="noopener">ClawHub →</a></div>
         </article>
