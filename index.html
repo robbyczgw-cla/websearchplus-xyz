@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Web Search Plus — One search. Every source.</title>
-<meta name="description" content="Web Search Plus routes research-grade web search and extraction across 14 search providers and 7 extraction providers for Hermes Agent, OpenClaw, NanoClaw and MCP clients — now with Keenable plus documented GroktoCrawl/local Firecrawl-compatible backends.">
+<meta name="description" content="Web Search Plus routes research-grade web search and extraction across 13 search providers and 7 extraction providers for Hermes Agent, OpenClaw, NanoClaw and MCP clients — now with Keenable plus documented GroktoCrawl/local Firecrawl-compatible backends.">
 <link rel="canonical" href="https://websearchplus.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web Search Plus">
@@ -24,7 +24,7 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw, NanoClaw and MCP clients, updated through Web Search Plus v2.6.1 and MCP v0.13.0 sync work.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://github.com/robbyczgw-cla/hermes-web-search-plus","https://github.com/robbyczgw-cla/web-search-plus-mcp","https://github.com/robbyczgw-cla/web-search-plus-plugin","https://github.com/robbyczgw-cla/web-search-plus","https://github.com/robbyczgw-cla/nanoclaw-web-search-plus"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 14 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG works self-hosted, and Keenable also offers an opt-in public tier, but authenticated provider keys are recommended for private or production use."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, NanoClaw through a dedicated utility-skill front-end, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 14 providers, and web_extract_plus pulls clean content from URLs across 7 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and self-hosted SearXNG costs nothing. Keenable's public tier is opt-in and disabled by default; use an API key for private or production use."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 13 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG works self-hosted, and Keenable also offers an opt-in public tier, but authenticated provider keys are recommended for private or production use."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, NanoClaw through a dedicated utility-skill front-end, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 13 providers, and web_extract_plus pulls clean content from URLs across 7 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and self-hosted SearXNG costs nothing. Keenable's public tier is opt-in and disabled by default; use an API key for private or production use."}}]}
 </script>
 <style>
 :root {
@@ -119,10 +119,18 @@ h2 { margin: 0; font-size: clamp(2rem, 6.5vw, 4.2rem); line-height: .98; letter-
 .card h3 { margin: 0 0 9px; font-size: 1.06rem; }
 .card p { margin: 0; color: var(--muted); font-size: .94rem; }
 .card .num { display: inline-flex; color: var(--accent); font-family: var(--mono); font-size: .72rem; font-weight: 900; letter-spacing: .08em; margin-bottom: 14px; }
-.provider-cloud { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; }
+.provider-legend { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 9px; color: var(--muted); font-family: var(--mono); font-size: .76rem; }
+.provider-legend span { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: rgba(255,255,255,.03); }
+.provider-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.provider-group-title { margin: 28px 0 12px; color: var(--accent); font-family: var(--mono); font-size: .78rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+.provider-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+.provider-cloud:first-of-type { margin-top: 18px; }
 .provider { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 10px 13px; background: rgba(255,255,255,.035); color: var(--muted); font-family: var(--mono); font-size: .82rem; }
 .provider b { color: var(--text); }
 .provider i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--accent-2); }
+.provider.search-extract { border-color: rgba(245,165,36,.42); background: rgba(245,165,36,.075); }
+.provider.search-only { border-color: rgba(104,225,253,.22); }
+.provider-badge { margin-left: 2px; border: 1px solid rgba(245,165,36,.38); border-radius: 999px; padding: 3px 7px; color: var(--accent); background: rgba(245,165,36,.1); font-size: .66rem; font-weight: 900; }
 .products { margin-top: 34px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .product { display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025)); min-width: 0; }
 .product.featured { border-color: rgba(245,165,36,.45); box-shadow: inset 0 0 0 1px rgba(245,165,36,.12), 0 28px 90px rgba(245,165,36,.08); }
@@ -268,14 +276,14 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div>
       <p class="eyebrow">Agentic web search</p>
       <h1>One search.<br><span class="hero-mark">Every source.</span></h1>
-      <p class="hero-sub">Web Search Plus routes live web search, research mode and URL extraction across the right providers — now security-hardened for Hermes Agent, OpenClaw, NanoClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
+      <p class="hero-sub">Web Search Plus routes each query across the right provider mesh for live search, research mode and URL extraction — with SSRF guards and safer defaults for Hermes Agent, OpenClaw, NanoClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
         <a class="btn btn-primary btn-primary-alt" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
         <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★<span id="star-count"></span></a>
       </div>
       <div class="hero-proof" aria-label="Project highlights">
-        <span class="pill"><strong>14</strong> search providers</span>
+        <span class="pill"><strong>13</strong> search providers</span>
         <span class="pill"><strong>7</strong> extraction providers</span>
         <span class="pill">research mode · canonical rerank · SSRF guards</span>
         <a class="pill pill-author" href="https://github.com/robbyczgw-cla" target="_blank" rel="noopener">Built by <strong>Robby Czesany</strong> <span>@robbyczgw-cla</span></a>
@@ -297,7 +305,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 
 <section class="statband" aria-label="Key numbers">
   <div class="container statband-inner">
-    <div class="stat"><b>14</b><span>search providers</span></div>
+    <div class="stat"><b>13</b><span>search providers</span></div>
     <div class="stat"><b>7</b><span>extraction providers</span></div>
     <div class="stat"><b>4</b><span>install paths</span></div>
     <div class="stat"><b><em>1</em></b><span>interface to learn</span></div>
@@ -331,22 +339,29 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div class="container">
       <p class="section-kicker">Provider mesh</p>
       <h2>Coverage without the mess.</h2>
-      <p class="section-lead">Use one interface; route across search, discovery, extraction and self-hosted privacy paths.</p>
-      <div class="provider-cloud fade" aria-label="Supported providers">
-        <span class="provider"><i style="background:#4285f4"></i><b>Serper</b> Google-style results</span>
-        <span class="provider"><i style="background:#fb542b"></i><b>Brave</b> broad web</span>
-        <span class="provider"><i style="background:#06b6d4"></i><b>Tavily</b> research</span>
-        <span class="provider"><i style="background:#f59e0b"></i><b>Exa</b> semantic discovery</span>
-        <span class="provider"><i style="background:#a855f6"></i><b>Querit</b> multilingual</span>
-        <span class="provider"><i style="background:#10b981"></i><b>Linkup</b> grounded citations</span>
-        <span class="provider"><i style="background:#f97316"></i><b>Firecrawl</b> scrape-ready content</span>
-        <span class="provider"><i style="background:#38bdf8"></i><b>Perplexity</b> summarized web</span>
-        <span class="provider"><i style="background:#8b5cf6"></i><b>Kilo Perplexity</b> gateway route</span>
-        <span class="provider"><i style="background:#ef4444"></i><b>You.com</b> web + code</span>
-        <span class="provider"><i style="background:#14b8a6"></i><b>SerpBase</b> Google SERP</span>
-        <span class="provider"><i style="background:#6366f1"></i><b>Parallel</b> explicit search + extract</span>
-        <span class="provider"><i style="background:#22c55e"></i><b>SearXNG</b> self-hosted</span>
-        <span class="provider"><i style="background:#f5a524"></i><b>Keenable</b> search + extract</span>
+      <p class="section-lead">Use one interface; route across 13 search providers, with 7 providers also able to extract clean page content.</p>
+      <div class="provider-legend fade" aria-label="Provider capability legend">
+        <span><i style="background:#f5a524"></i>search + extract</span>
+        <span><i style="background:#68e1fd"></i>search only</span>
+      </div>
+      <h3 class="provider-group-title fade">Search + extract · 7 providers</h3>
+      <div class="provider-cloud fade" aria-label="Search and extraction providers">
+        <span class="provider search-extract"><i style="background:#06b6d4"></i><b>Tavily</b> research <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#f59e0b"></i><b>Exa</b> semantic discovery <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#10b981"></i><b>Linkup</b> grounded citations <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#f97316"></i><b>Firecrawl</b> scrape-ready content <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#6366f1"></i><b>Parallel</b> explicit search <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#ef4444"></i><b>You.com</b> web + code <span class="provider-badge">search + extract</span></span>
+        <span class="provider search-extract"><i style="background:#f5a524"></i><b>Keenable</b> independent index <span class="provider-badge">search + extract</span></span>
+      </div>
+      <h3 class="provider-group-title fade">Search only · 6 providers</h3>
+      <div class="provider-cloud fade" aria-label="Search-only providers">
+        <span class="provider search-only"><i style="background:#4285f4"></i><b>Serper</b> Google-style results</span>
+        <span class="provider search-only"><i style="background:#fb542b"></i><b>Brave</b> broad web</span>
+        <span class="provider search-only"><i style="background:#a855f6"></i><b>Querit</b> multilingual</span>
+        <span class="provider search-only"><i style="background:#38bdf8"></i><b>Perplexity</b> summarized web</span>
+        <span class="provider search-only"><i style="background:#14b8a6"></i><b>SerpBase</b> Google SERP</span>
+        <span class="provider search-only"><i style="background:#22c55e"></i><b>SearXNG</b> self-hosted</span>
       </div>
     </div>
   </section>
@@ -411,7 +426,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         </article>
         <article class="product fade">
           <div class="product-head"><h3 class="product-title">MCP Server</h3><span class="badge">PyPI v0.13.0</span></div>
-          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Current PyPI line carries the v2.6.1 engine family: 14 search providers, 7 extraction providers, Keenable, GroktoCrawl/local Firecrawl-compatible backend docs, registry-backed diagnostics and config-driven disabled-provider gating for extract.</p>
+          <p>Standalone Python MCP server for Claude Desktop, Cursor, NanoBot and other clients. Current PyPI line carries the v2.6.1 engine family: 13 search providers, 7 extraction providers, Keenable, GroktoCrawl/local Firecrawl-compatible backend docs, registry-backed diagnostics and config-driven disabled-provider gating for extract.</p>
           <div class="install"><code>uvx web-search-plus-mcp</code><button class="copy" onclick="copyText('uvx web-search-plus-mcp', this)">Copy</button></div>
           <div class="links"><a href="https://pypi.org/project/web-search-plus-mcp/" target="_blank" rel="noopener">PyPI →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-mcp" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
@@ -507,7 +522,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
         <article class="update"><div class="update-meta"><b>Hermes v2.6.1</b><span>June 26, 2026</span></div><p>GroktoCrawl can be used as a local Firecrawl-compatible backend through the existing <code>firecrawl.api_url</code> and <code>firecrawl.scrape_url</code> overrides; no separate provider or default backend required.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.6.0</b><span>June 26, 2026</span></div><p>Keenable joins the Hermes provider lineup for search and extraction. Use <code>KEENABLE_API_KEY</code> for authenticated calls; the keyless public endpoint is opt-in and disabled by default.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.5.1</b><span>June 16, 2026</span></div><p>Config-driven provider gating now covers both search and extraction. Firecrawl and any other provider can be disabled centrally in <code>config.json</code> without touching release code.</p></article>
-        <article class="update"><div class="update-meta"><b>MCP v0.13.0</b><span>current PyPI</span></div><p>Standalone MCP package syncs the v2.6.1 provider line: Keenable search/extract, opt-in keyless public mode, GroktoCrawl/local Firecrawl-compatible backend docs and 14/7 provider schemas for Claude Desktop, Cursor, NanoBot and other clients.</p></article>
+        <article class="update"><div class="update-meta"><b>MCP v0.13.0</b><span>current PyPI</span></div><p>Standalone MCP package syncs the v2.6.1 provider line: Keenable search/extract, opt-in keyless public mode, GroktoCrawl/local Firecrawl-compatible backend docs and 13/7 provider schemas for Claude Desktop, Cursor, NanoBot and other clients.</p></article>
         <article class="update"><div class="update-meta"><b>OpenClaw Skill v3.2.0</b><span>June 10, 2026</span></div><p>Feature sync with the Hermes v2 line plus SkillSpector fixes: narrow triggers, privacy disclosures, hardened local cache permissions, SSRF URL guard, permission metadata and credential redaction.</p></article>
         <article class="update"><div class="update-meta"><b>OpenClaw Plugin v3.1.0</b><span>June 10, 2026</span></div><p>Native plugin release adds research mode, authority reranking, quality signals and retry jitter; ClawHub artifact verified and install-smoked through OpenClaw.</p></article>
         <article class="update"><div class="update-meta"><b>NanoClaw utility skill</b><span>GitHub</span></div><p>Dedicated NanoClaw front-end packages the shared engine as a self-contained <code>wsp</code> CLI skill for agent containers — search and extract, no MCP bridge required.</p></article>
@@ -521,7 +536,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
       <h2>Quick answers.</h2>
       <div class="faq fade">
         <details>
-          <summary>Do I need API keys for all 14 providers?</summary>
+          <summary>Do I need API keys for all 13 providers?</summary>
           <p>No. One provider key is enough to get started — routing adapts to whichever keys are present and simply gets smarter as you add more. SearXNG works self-hosted, and Keenable has an opt-in public tier, but provider keys are recommended for private or production use.</p>
         </details>
         <details>
@@ -534,7 +549,7 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
         </details>
         <details>
           <summary>Does it extract page content too, or just search?</summary>
-          <p>Both. <code>web_search_plus</code> handles live search across 14 providers, and <code>web_extract_plus</code> pulls clean content from URLs across 7 extraction providers with the same fallback behavior.</p>
+          <p>Both. <code>web_search_plus</code> handles live search across 13 providers, and <code>web_extract_plus</code> pulls clean content from URLs across 7 extraction providers with the same fallback behavior.</p>
         </details>
         <details>
           <summary>What does it cost?</summary>
