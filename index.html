@@ -118,6 +118,8 @@ h2 { margin: 0; font-size: clamp(2rem, 6.5vw, 4.2rem); line-height: .98; letter-
 .demo-frame video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 24px; background: #05070b; object-fit: cover; }
 .demo-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 12px; color: var(--dim); font-family: var(--mono); font-size: .78rem; }
 .demo-caption strong { color: var(--accent); }
+.feature-sheet-frame { margin-top: 34px; border: 1px solid rgba(104,225,253,.25); border-radius: 34px; padding: 12px; background: radial-gradient(circle at top, rgba(104,225,253,.10), transparent 42%), rgba(255,255,255,.035); box-shadow: 0 34px 120px rgba(0,0,0,.32), 0 22px 90px rgba(104,225,253,.06); }
+.feature-sheet-frame img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 24px; background: #05070b; }
 .cards { margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 23px; background: rgba(255,255,255,.035); min-width: 0; }
 .card h3 { margin: 0 0 9px; font-size: 1.06rem; }
@@ -268,6 +270,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div class="nav-links">
       <a href="#how">How</a>
       <a href="#demo">Demo</a>
+      <a href="#feature-sheet">Feature sheet</a>
       <a href="#install">Install</a>
       <a href="#providers">Providers</a>
       <a href="#quickstart">Quickstart</a>
@@ -334,7 +337,19 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     </div>
   </section>
 
-  <section id="how" class="section alt">
+  <section id="feature-sheet" class="section alt">
+    <div class="container">
+      <p class="section-kicker">Developer feature sheet</p>
+      <h2>The whole tool surface at a glance.</h2>
+      <p class="section-lead">A compact operator/developer map for the two-tool API, Routing v2 behavior, onboarding model, and the 13 search / 7 extraction provider mesh.</p>
+      <figure class="feature-sheet-frame fade">
+        <img src="/assets/web-search-plus-developer-feature-sheet.jpg" alt="Web Search Plus developer feature sheet showing search, extraction, Routing v2, onboarding, public API, 13 search providers, and 7 extraction providers." loading="lazy" decoding="async">
+        <figcaption class="demo-caption"><span><strong>v2.6.1 feature sheet</strong> · API · routing · providers</span><span>developer/operator reference</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="how" class="section">
     <div class="container">
       <p class="section-kicker">Why it exists</p>
       <h2>Stop hardcoding one search backend.</h2>
