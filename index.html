@@ -114,6 +114,10 @@ h1 { margin: 0; max-width: 780px; font-family: var(--serif); font-size: clamp(3.
 .section-kicker { color: var(--accent); font-family: var(--mono); font-size: .76rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
 h2 { margin: 0; font-size: clamp(2rem, 6.5vw, 4.2rem); line-height: .98; letter-spacing: -.055em; }
 .section-lead { color: var(--muted); max-width: 690px; margin: 18px 0 0; font-size: clamp(1rem, 2.4vw, 1.18rem); }
+.demo-frame { margin-top: 34px; border: 1px solid rgba(245,165,36,.34); border-radius: 34px; padding: 14px; background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.025)); box-shadow: 0 34px 120px rgba(0,0,0,.34), 0 22px 90px rgba(245,165,36,.08); }
+.demo-frame video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 24px; background: #05070b; object-fit: cover; }
+.demo-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 12px; color: var(--dim); font-family: var(--mono); font-size: .78rem; }
+.demo-caption strong { color: var(--accent); }
 .cards { margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 23px; background: rgba(255,255,255,.035); min-width: 0; }
 .card h3 { margin: 0 0 9px; font-size: 1.06rem; }
@@ -263,6 +267,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <a class="brand" href="#top" aria-label="Web Search Plus home"><img src="/assets/web-search-plus-icon-192.png" alt=""><span>web-search-plus</span></a>
     <div class="nav-links">
       <a href="#how">How</a>
+      <a href="#demo">Demo</a>
       <a href="#install">Install</a>
       <a href="#providers">Providers</a>
       <a href="#quickstart">Quickstart</a>
@@ -280,7 +285,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <p class="hero-sub">Web Search Plus routes each query across the right provider mesh for live search, research mode and URL extraction — with SSRF guards and safer defaults for Hermes Agent, OpenClaw, NanoClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
-        <a class="btn btn-primary btn-primary-alt" href="#quickstart" data-open-tab="plugin">Install for OpenClaw →</a>
+        <a class="btn btn-primary btn-primary-alt" href="#demo">Watch the demo →</a>
         <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub ★<span id="star-count"></span></a>
       </div>
       <div class="hero-proof" aria-label="Project highlights">
@@ -314,7 +319,22 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 </section>
 
 <main>
-  <section id="how" class="section">
+  <section id="demo" class="section">
+    <div class="container">
+      <p class="section-kicker">Product demo</p>
+      <h2>Agent answers first. Operator receipts when you need them.</h2>
+      <p class="section-lead">A two-minute walkthrough of Web Search Plus as an agent-operator layer: natural answers by default, inspectable routing and fallback for operators, and one stable API for developers.</p>
+      <div class="demo-frame fade">
+        <video controls preload="metadata" playsinline poster="/assets/web-search-plus-demo-v17-poster.jpg">
+          <source src="/assets/web-search-plus-demo-v17.mp4" type="video/mp4">
+          Download the demo video: <a href="/assets/web-search-plus-demo-v17.mp4">web-search-plus-demo-v17.mp4</a>
+        </video>
+        <div class="demo-caption"><span><strong>v17 explainer</strong> · 16:9 · narrated · 113s</span><span>Hermes UIs · adapters · MCP clients</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section alt">
     <div class="container">
       <p class="section-kicker">Why it exists</p>
       <h2>Stop hardcoding one search backend.</h2>
@@ -336,7 +356,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     </div>
   </section>
 
-  <section id="providers" class="section alt">
+  <section id="providers" class="section">
     <div class="container">
       <p class="section-kicker">Provider mesh</p>
       <h2>Coverage without the mess.</h2>
