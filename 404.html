@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 — Web Search Plus</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<style>
+:root { color-scheme: dark; --bg: #08090d; --line: rgba(255,255,255,.11); --text: #f4f1eb; --muted: #a9acb7; --accent: #f5a524; --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --serif: ui-serif, Georgia, Cambria, "Times New Roman", serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px; font-family: var(--sans); color: var(--text); text-align: center; line-height: 1.55; background: radial-gradient(circle at 12% -10%, rgba(245,165,36,.23), transparent 32rem), radial-gradient(circle at 95% 8%, rgba(104,225,253,.12), transparent 28rem), var(--bg); }
+.eyebrow { color: var(--accent); font-family: var(--mono); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin: 0 0 18px; }
+h1 { margin: 0; font-family: var(--serif); font-size: clamp(3.2rem, 12vw, 6.5rem); line-height: .9; letter-spacing: -.06em; font-weight: 900; }
+p { margin: 20px auto 0; max-width: 460px; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; min-height: 48px; border-radius: 999px; padding: 13px 19px; border: 1px solid var(--line); color: var(--text); text-decoration: none; font-weight: 800; font-size: .94rem; background: rgba(255,255,255,.04); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #101010; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">404 — route not found</p>
+  <h1>No provider<br>answered this one.</h1>
+  <p>This URL doesn't exist. The fallback chain suggests one of these instead:</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="/">Home</a>
+    <a class="btn" href="/providers">Provider guide</a>
+    <a class="btn" href="https://github.com/robbyczgw-cla/hermes-web-search-plus" rel="noopener">GitHub</a>
+  </div>
+</main>
+</body>
+</html>
