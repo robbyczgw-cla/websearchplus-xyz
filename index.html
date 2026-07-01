@@ -19,6 +19,7 @@
 <meta name="twitter:description" content="v2.8.0: safe long-page extraction, freshness controls, provider benchmarking, generated references, and tighter routing/security hardening.">
 <meta name="twitter:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw, NanoClaw and MCP clients, updated through Web Search Plus v2.8.0 and MCP v0.14.0 sync work.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://github.com/robbyczgw-cla/hermes-web-search-plus","https://github.com/robbyczgw-cla/web-search-plus-mcp","https://github.com/robbyczgw-cla/web-search-plus-plugin","https://github.com/robbyczgw-cla/web-search-plus","https://github.com/robbyczgw-cla/nanoclaw-web-search-plus"]}
@@ -182,8 +183,8 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
 .footer-links a { color: var(--dim); font-family: var(--mono); font-size: .82rem; }
 .footer-links a:hover { color: var(--accent); }
-.fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-.fade.visible { opacity: 1; transform: translateY(0); }
+.js .fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.js .fade.visible { opacity: 1; transform: translateY(0); }
 .card, .provider, .product, .step { transition: transform .18s ease, border-color .18s ease, background .18s ease; }
 .card:hover, .step:hover { transform: translateY(-2px); border-color: var(--line-strong); background: rgba(255,255,255,.05); }
 .provider:hover { border-color: rgba(245,165,36,.4); color: var(--text); }
@@ -266,7 +267,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .fade { opacity: 1; transform: none; transition: none; }
+  .js .fade { opacity: 1; transform: none; transition: none; }
   .card, .provider, .product, .step, .route-row, .btn { transition: none; }
   .live-tag i, .route-row.live .route-badge { animation: none; }
 }
