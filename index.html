@@ -4,24 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Web Search Plus — One search. Every source.</title>
-<meta name="description" content="Web Search Plus routes research-grade web search and extraction across 14 search providers and 7 extraction providers for Hermes Agent, OpenClaw, NanoClaw and MCP clients — now with Keenable plus documented GroktoCrawl/local Firecrawl-compatible backends.">
+<meta name="description" content="Web Search Plus is an agent-operator search and extraction layer: one interface, 14 search providers, 7 extraction providers, intelligent routing, safe long-page extraction, freshness controls, and provider benchmarking for Hermes Agent, OpenClaw, NanoClaw and MCP clients.">
 <link rel="canonical" href="https://websearchplus.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Web Search Plus">
 <meta property="og:title" content="Web Search Plus — One search. Every source.">
-<meta property="og:description" content="Multi-provider search and extraction for Hermes Agent, OpenClaw, NanoClaw and any MCP client. v2.7.0 adds private extract-target protection, keyless-provider onboarding, and a public-Hermes fast-path doctor.">
+<meta property="og:description" content="One agent-facing interface for multi-provider web search and extraction. v2.8.0 adds safe long-page extraction, freshness controls, provider benchmarking, generated references, and tighter routing/security hardening.">
 <meta property="og:url" content="https://websearchplus.xyz/">
 <meta property="og:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Web Search Plus — One search. Every source.">
-<meta name="twitter:description" content="v2.7.0 ships private extract-target protection, keyless setup, and the fast-path doctor.">
+<meta name="twitter:description" content="v2.8.0: safe long-page extraction, freshness controls, provider benchmarking, generated references, and tighter routing/security hardening.">
 <meta name="twitter:image" content="https://websearchplus.xyz/assets/web-search-plus-og.png">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/web-search-plus-icon-192.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw, NanoClaw and MCP clients, updated through Web Search Plus v2.7.0 and MCP v0.14.0 sync work.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://github.com/robbyczgw-cla/hermes-web-search-plus","https://github.com/robbyczgw-cla/web-search-plus-mcp","https://github.com/robbyczgw-cla/web-search-plus-plugin","https://github.com/robbyczgw-cla/web-search-plus","https://github.com/robbyczgw-cla/nanoclaw-web-search-plus"]}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Search Plus","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","url":"https://websearchplus.xyz/","image":"https://websearchplus.xyz/assets/web-search-plus-og.png","description":"Multi-provider web search and extraction with research mode, canonical-source reranking and intelligent routing for Hermes Agent, OpenClaw, NanoClaw and MCP clients, updated through Web Search Plus v2.8.0 and MCP v0.14.0 sync work.","author":{"@type":"Person","name":"Robby Czesany","url":"https://github.com/robbyczgw-cla","sameAs":["https://github.com/robbyczgw-cla"]},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://github.com/robbyczgw-cla/hermes-web-search-plus","https://github.com/robbyczgw-cla/web-search-plus-mcp","https://github.com/robbyczgw-cla/web-search-plus-plugin","https://github.com/robbyczgw-cla/web-search-plus","https://github.com/robbyczgw-cla/nanoclaw-web-search-plus"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys for all 14 providers?","acceptedAnswer":{"@type":"Answer","text":"No. One provider key is enough to get started — routing adapts to whichever keys are present and gets smarter as you add more. SearXNG works self-hosted, and Keenable also offers an opt-in public tier, but authenticated provider keys are recommended for private or production use."}},{"@type":"Question","name":"Which clients does Web Search Plus work with?","acceptedAnswer":{"@type":"Answer","text":"Hermes Agent and OpenClaw natively as flagship plugins, NanoClaw through a dedicated utility-skill front-end, plus Claude Desktop, Claude Code, Cursor, NanoBot and any other MCP-compatible client through the standalone web-search-plus-mcp server on PyPI."}},{"@type":"Question","name":"What happens when a provider fails?","acceptedAnswer":{"@type":"Answer","text":"The router falls through the chain: a missing key, provider error or empty result set moves the request to the next candidate automatically. The quality report records every fallback taken, so nothing fails silently."}},{"@type":"Question","name":"Does it extract page content too, or just search?","acceptedAnswer":{"@type":"Answer","text":"Both. web_search_plus handles live search across 14 providers, and web_extract_plus pulls clean content from URLs across 7 extraction providers with the same fallback behavior."}},{"@type":"Question","name":"What does Web Search Plus cost?","acceptedAnswer":{"@type":"Answer","text":"The router itself is free and open source on GitHub. You only pay the providers you choose to configure — many offer generous free tiers, and self-hosted SearXNG costs nothing. Keenable's public tier is opt-in and disabled by default; use an API key for private or production use. See the provider guide for provider-by-provider free-tier and pricing caveats."}}]}
@@ -294,7 +294,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
     <div>
       <p class="eyebrow">Agentic web search</p>
       <h1>One search.<br><span class="hero-mark">Every source.</span></h1>
-      <p class="hero-sub">Web Search Plus routes each query across the right provider mesh for live search, research mode and URL extraction — with SSRF guards and safer defaults for Hermes Agent, OpenClaw, NanoClaw, Claude Code, Cursor, NanoBot and any MCP client.</p>
+      <p class="hero-sub">Web Search Plus gives agents one stable search and extraction interface, then routes each job across the provider mesh that fits: live search, research mode, URL extraction, freshness filters, long-page storage, fallbacks and operator receipts — without hardcoding one brittle backend.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#quickstart" data-open-tab="hermes">Install for Hermes →</a>
         <a class="btn btn-primary btn-primary-alt" href="/providers.html">Compare providers →</a>
@@ -304,7 +304,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <div class="hero-proof" aria-label="Project highlights">
         <span class="pill"><strong>14</strong> search providers</span>
         <span class="pill"><strong>7</strong> extraction providers</span>
-        <span class="pill">research mode · canonical rerank · SSRF guards</span>
+        <span class="pill">routing · freshness · long-page extract · bench</span>
         <a class="pill pill-author" href="https://github.com/robbyczgw-cla" target="_blank" rel="noopener">Built by <strong>Robby Czesany</strong> <span>@robbyczgw-cla</span></a>
       </div>
     </div>
@@ -354,7 +354,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <p class="section-lead">A compact operator/developer map for the two-tool API, Routing v2 behavior, onboarding model, and the 14 search / 7 extraction provider mesh.</p>
       <figure class="feature-sheet-frame fade">
         <img src="/assets/web-search-plus-developer-feature-sheet.jpg" alt="Web Search Plus developer feature sheet showing search, extraction, Routing v2, onboarding, public API, 14 search providers, and 7 extraction providers." loading="lazy" decoding="async">
-        <figcaption class="demo-caption"><span><strong>v2.7.0 feature sheet</strong> · API · routing · providers</span><span>developer/operator reference</span></figcaption>
+        <figcaption class="demo-caption"><span><strong>operator feature sheet</strong> · API · routing · providers</span><span>developer/operator reference</span></figcaption>
       </figure>
     </div>
   </section>
@@ -367,7 +367,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
       <div class="cards">
         <article class="card fade"><span class="num">01</span><h3>Intent routing</h3><p>Research, shopping, news, local, semantic discovery and extraction each get routed to providers that are actually good at that job.</p></article>
         <article class="card fade"><span class="num">02</span><h3>Failure-tolerant</h3><p>Missing key, provider hiccup or empty result? It falls through instead of making the agent faceplant like a demo on conference Wi‑Fi.</p></article>
-        <article class="card fade"><span class="num">03</span><h3>Debuggable + safer</h3><p>Quality reports explain provider choice, canonical-domain boosts, errors, timing and extraction path; SSRF guards block private and metadata URLs by default.</p></article>
+        <article class="card fade"><span class="num">03</span><h3>Debuggable + safer</h3><p>Quality reports explain provider choice, canonical-domain boosts, errors and timing; long extracts are stored page-on-demand, and SSRF guards block private and metadata URLs by default.</p></article>
       </div>
       <div class="compare fade">
         <div class="compare-head"><span>One hardcoded backend</span><span>Web Search Plus</span></div>
@@ -376,6 +376,7 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
         <div class="compare-row"><div><span class="mark x">✕</span>New client or runtime = new provider glue code</div><div><span class="mark v">✓</span>One engine across Hermes, OpenClaw and any MCP client</div></div>
         <div class="compare-row"><div><span class="mark x">✕</span>Empty results fail silently mid-task</div><div><span class="mark v">✓</span>Quality reports show who answered, why and how fast</div></div>
         <div class="compare-row"><div><span class="mark x">✕</span>Mirrors and SEO sludge outrank primary sources</div><div><span class="mark v">✓</span>Canonical-source reranking boosts official docs, releases, policy and security sources</div></div>
+        <div class="compare-row"><div><span class="mark x">✕</span>Huge pages and data-URI junk flood the agent context</div><div><span class="mark v">✓</span>Long extracts return a clean preview plus stored full text for page-on-demand</div></div>
         <div class="compare-row"><div><span class="mark x">✕</span>User-supplied URLs can wander into private networks</div><div><span class="mark v">✓</span>SSRF protection blocks loopback, private ranges and cloud metadata endpoints by default</div></div>
       </div>
     </div>
@@ -469,10 +470,10 @@ pre { margin: 0; overflow-x: auto; padding: 24px 20px; color: var(--text); font-
           <div class="links"><a href="https://clawhub.ai/plugins/web-search-plus-plugin-v2" target="_blank" rel="noopener">ClawHub →</a><a href="https://github.com/robbyczgw-cla/web-search-plus-plugin" target="_blank" rel="noopener">GitHub →</a></div>
         </article>
         <article class="product featured fade">
-          <div class="product-head"><h3 class="product-title">Hermes Agent</h3><span class="badge">primary · v2.7.0</span></div>
-          <p>Hermes plugin exposing <code>web_search_plus</code> and <code>web_extract_plus</code>, now with private extract-target protection, keyless-provider setup, fast-path diagnostics, Keenable search/extraction, Kilo-Perplexity search, documented GroktoCrawl/local Firecrawl-compatible backend overrides, in-process tool calls, parallel research mode and adaptive routing memory.</p>
+          <div class="product-head"><h3 class="product-title">Hermes Agent</h3><span class="badge">primary · v2.8.0</span></div>
+          <p>Hermes plugin exposing <code>web_search_plus</code> and <code>web_extract_plus</code>, now with safe truncate-and-store extraction for long pages, unified freshness filters, a provider bench for priority tuning, generated provider/routing references, private extract-target protection, keyless-provider setup, in-process tool calls, parallel research mode and adaptive routing memory.</p>
           <div class="install"><code>hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable</code><button class="copy" onclick="copyText('hermes plugins install robbyczgw-cla/hermes-web-search-plus --enable', this)">Copy</button></div>
-          <div class="links"><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub →</a><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.7.0" target="_blank" rel="noopener">Release →</a></div>
+          <div class="links"><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus" target="_blank" rel="noopener">GitHub →</a><a href="https://github.com/robbyczgw-cla/hermes-web-search-plus/releases/tag/v2.8.0" target="_blank" rel="noopener">Release →</a></div>
         </article>
         <article class="product fade">
           <div class="product-head"><h3 class="product-title">NanoClaw Utility Skill</h3><span class="badge">GitHub</span></div>
@@ -574,8 +575,9 @@ web_extract_plus(urls=["https://example.com/docs"])</pre></div>
     <div class="container">
       <p class="section-kicker">Current state</p>
       <h2>Fresh, not fossilized.</h2>
-      <p class="section-lead">The page tracks the current mainline surface: Hermes v2.7.0, OpenClaw Plugin v3.1.0, OpenClaw Skill v3.2.0 and MCP v0.14.0 — no fossilized release copy.</p>
+      <p class="section-lead">The page tracks the current mainline surface: Hermes v2.8.0, OpenClaw Plugin v3.1.0, OpenClaw Skill v3.2.0 and MCP v0.14.0 — no fossilized release copy.</p>
       <div class="updates fade">
+        <article class="update"><div class="update-meta"><b>Hermes v2.8.0</b><span>July 2, 2026</span></div><p>Long <code>web_extract_plus</code> pages now return clean head/tail previews plus stored full text for page-on-demand; <code>web_search_plus</code> gains unified freshness filters; <code>setup.py bench</code> ranks configured providers without writing config.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.7.0</b><span>June 30, 2026</span></div><p>Private/internal extraction target URLs are blocked before provider dispatch, keyless-provider setup is smoother, and <code>setup.py fastpath</code> checks whether current public Hermes is routed through Web Search Plus cleanly.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.6.1</b><span>June 26, 2026</span></div><p>GroktoCrawl can be used as a local Firecrawl-compatible backend through the existing <code>firecrawl.api_url</code> and <code>firecrawl.scrape_url</code> overrides; no separate provider or default backend required.</p></article>
         <article class="update"><div class="update-meta"><b>Hermes v2.6.0</b><span>June 26, 2026</span></div><p>Keenable joins the Hermes provider lineup for search and extraction. Use <code>KEENABLE_API_KEY</code> for authenticated calls; the keyless public endpoint is opt-in and disabled by default.</p></article>
