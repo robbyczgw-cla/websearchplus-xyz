@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://websearchplus.xyz/sitemap.xml
